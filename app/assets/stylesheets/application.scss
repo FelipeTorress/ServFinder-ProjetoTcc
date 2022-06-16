@@ -12,6 +12,21 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
  //alterar css da aplicação
+
+.icon-navbar-custom{
+    display: flex;
+    height: 2.2rem
+}
+
+#search-navbar{
+    width: 30%;
+    height: 10%;
+}
+
+#user-pill {
+    margin-right: 4rem;
+}

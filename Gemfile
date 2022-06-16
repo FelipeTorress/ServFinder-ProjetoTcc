@@ -30,6 +30,7 @@ gem 'devise'
 gem 'autoprefixer-rails'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem "font-awesome-rails"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
