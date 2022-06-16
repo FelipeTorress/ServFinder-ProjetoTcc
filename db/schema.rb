@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2022_06_14_234226) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "phone_number"
-    t.boolean "permit_phone_number"
-    t.boolean "permit_email"
+    t.boolean "permit_phone_number", default: true
+    t.boolean "permit_email", default: true
     t.boolean "accepted_terms_of_use"
     t.boolean "accepted_privacy_policy"
     t.index ["email"], name: "index_users_on_email", unique: true

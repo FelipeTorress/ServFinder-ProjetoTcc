@@ -14,8 +14,9 @@
   </div>
 
   <div class="field">
-    <%= f.label :telefone %><br />
-    <%= f.telephone_field :phone_number, autocomplete: "Digite telefone" %>
+    <%= f.label :telefone %>
+    <em>(apenas numeros)</em><br />
+    <%= f.telephone_field :phone_number, autocomplete: "Digite telefone", pattern: '\([0-9]{2}\)[0-9]{4,6}-?[0-9]{3,4}$' %>
   </div>
 
   <div class="field">
