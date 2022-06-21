@@ -1,0 +1,48 @@
+<div class="container">
+  <% if @service != nil && @service.errors.any? %>
+    <h2>Os seguintes erros foram encontrados:</h2>
+    <ul>
+      <% @service.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="container" id="cards-width">
+    <%= form_with(model: @service, class: "shadow p-3 mb-3 bg-info rounded centralizar", local: true) do |f| %>
+        <div class="centralizar">
+            <h5 class="text-light">Qual serviço você precisa?</h5>
+            <div class="form-group row">
+                <div class="centralizar-form-newservice">
+                <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Resumo do Serviço" %>
+                </div>
+            </div>
+
+            <h5 class="text-light">Dê detalhes do serviço que você precisa</h5>
+            <div class="form-group row">
+                <div class="centralizar-form-newservice"> 
+                <%= f.text_area :description, rows: 10, class: "form-control shadow rounded", placeholder: "Descrição do Serviço" %>
+                </div>
+            </div>
+
+            <h5 class="text-light">Deseja colocar uma data para encerrar o anuncio do serviço?</h5>
+            <div class="form-group row">
+                <div>
+                    <%= f.date_field :encerramento_anuncio %>
+                </div>
+            </div>
+
+            <h5 class="text-light">Quanto você vai pagar pelo serviço?</h5>
+            <div class="form-group row">
+                <div>
+                    <%= f.number_field :preco %>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <%= f.submit( @service.new_record? ? "Criar Artigo" : "Editar Artigo",class: "btn btn-outline-light btn-lg" ) %>
+            </div>
+        </div>
+    <% end %>
+  </div>
+</div>
