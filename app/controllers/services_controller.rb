@@ -1,9 +1,13 @@
 class ServicesController < ApplicationController
 
   def show
+    #remover dps
+    @service = Service.find(params[:id])
   end
 
   def index
+    #@articles = Article.paginate(page: params[:page], per_page: 5)
+    @service = Service.all
   end
 
   def new
@@ -19,6 +23,30 @@ class ServicesController < ApplicationController
     else
       render "new"
     end
+  end
+
+
+  def edit
+    @service = Service.find(params[:id])#remover dps
+  end
+
+  def update
+    @service = Service.find(params[:id]) #remover dps
+    if @service.update(service_params)
+      flash[:notice] = "Artigo editado com sucesso!"
+      redirect_to service_path(@service)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    # @service.destroy
+    # redirect_to service_path
+
+    @service = Service.find(params[:id])
+    @service.destroy
+    redirect_to services_path
   end
 
   private 

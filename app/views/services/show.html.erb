@@ -1,1 +1,8 @@
-<h1>Hello, ta no show do service</h1>
+<h1>Detalhes do Serviço</h1>
+
+<p><strong>Title: </strong><%= @service.title %></p>
+<p><strong>Description: </strong><%= @service.description %></p>
+
+<%= link_to 'Editar', edit_service_path(@service) %> |
+<%= link_to 'Deletar', service_path(@service), method: :delete, data: { confirm: "Tem Certeza" } %> |
+<%= link_to 'Voltar a listagem de Serviços', services_path %>
