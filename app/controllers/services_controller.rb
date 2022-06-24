@@ -1,8 +1,7 @@
 class ServicesController < ApplicationController
+  before_action :search_article, only: [:show, :edit, :update, :destroy]
 
   def show
-    #remover dps
-    @service = Service.find(params[:id])
   end
 
   def index
@@ -27,11 +26,9 @@ class ServicesController < ApplicationController
 
 
   def edit
-    @service = Service.find(params[:id])#remover dps
   end
 
   def update
-    @service = Service.find(params[:id]) #remover dps
     if @service.update(service_params)
       flash[:notice] = "Artigo editado com sucesso!"
       redirect_to service_path(@service)
@@ -41,10 +38,6 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    # @service.destroy
-    # redirect_to service_path
-
-    @service = Service.find(params[:id])
     @service.destroy
     redirect_to services_path
   end
@@ -53,5 +46,9 @@ class ServicesController < ApplicationController
 
   def service_params
     return params.require(:service).permit(:title, :description, :encerramento_anuncio, :preco)
+  end
+
+  def search_article
+    return @article = Article.find(params[:id])
   end
 end

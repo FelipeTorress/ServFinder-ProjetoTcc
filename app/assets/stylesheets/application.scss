@@ -17,6 +17,10 @@
 
  //alterar css da aplicação
 
+html,body {
+  height: 100%;
+}
+
 .icon-navbar-custom{
     display: flex;
     height: 2.2rem
@@ -44,3 +48,28 @@
     width: 70%;
     margin: 10px auto;
 }
+
+.welcome-banner{
+    width: 80%;
+    height: 70%;
+    height: 80vh; 
+    overflow:hidden;
+    background-image: asset_url('welcome-box-image.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#sticky-footer {
+    flex-shrink: none;
+    margin-top: 10px;
+    a{
+        color: gray;
+        text-decoration: none;
+    };
+
+    a:hover{
+        text-decoration: underline;
+        color: black;
+    }
+} 
