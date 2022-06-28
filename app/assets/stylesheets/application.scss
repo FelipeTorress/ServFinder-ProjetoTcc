@@ -72,4 +72,18 @@ html,body {
         text-decoration: underline;
         color: black;
     }
-} 
+}
+
+.card-service{
+    display: grid;
+    justify-content: center;
+    margin: 1rem auto;
+    grid-template-columns: repeat(4 ,1fr);
+    gap: 1rem;
+}
+
+
+.card-buttons{
+    justify-content: space-between;
+    flex-direction: row;
+}

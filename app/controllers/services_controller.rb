@@ -15,7 +15,7 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.create(service_params)
-    #@article.user = current_user
+    #@service.user = current_user
     if @service.save
       flash[:notice] = "Serviço criado com sucesso!"
       redirect_to service_path(@service)
@@ -30,7 +30,7 @@ class ServicesController < ApplicationController
 
   def update
     if @service.update(service_params)
-      flash[:notice] = "Artigo editado com sucesso!"
+      flash[:notice] = "Serviço editado com sucesso!"
       redirect_to service_path(@service)
     else
       render 'edit'
@@ -49,6 +49,6 @@ class ServicesController < ApplicationController
   end
 
   def search_article
-    return @article = Article.find(params[:id])
+    return @service = Service.find(params[:id])
   end
 end
