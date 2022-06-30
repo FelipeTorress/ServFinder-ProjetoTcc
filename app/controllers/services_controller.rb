@@ -15,7 +15,7 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.create(service_params)
-    #@service.user = current_user
+    @service.user = current_user
     if @service.save
       flash[:notice] = "Serviço criado com sucesso!"
       redirect_to service_path(@service)
@@ -45,7 +45,7 @@ class ServicesController < ApplicationController
   private 
 
   def service_params
-    return params.require(:service).permit(:title, :description, :encerramento_anuncio, :preco)
+    return params.require(:service).permit(:title, :description, :limit_date, :value)
   end
 
   def search_article

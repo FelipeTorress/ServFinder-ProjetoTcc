@@ -13,14 +13,16 @@
 ActiveRecord::Schema.define(version: 2022_06_20_233453) do
 
   create_table "services", force: :cascade do |t|
-    t.integer "user_creator_id"
+    t.integer "user_id"
     t.integer "user_selected_id"
     t.string "title"
     t.text "description"
-    t.datetime "encerramento_anuncio"
-    t.decimal "preco"
+    t.datetime "limit_date"
+    t.decimal "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_services_on_title"
+    t.index ["user_id"], name: "index_services_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

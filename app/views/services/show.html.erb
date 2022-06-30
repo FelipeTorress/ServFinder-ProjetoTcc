@@ -1,8 +1,23 @@
-<h1>Detalhes do Serviço</h1>
-
-<p><strong>Title: </strong><%= @service.title %></p>
-<p><strong>Description: </strong><%= @service.description %></p>
-
-<%= link_to 'Editar', edit_service_path(@service) %> |
-<%= link_to 'Deletar', service_path(@service), method: :delete, data: { confirm: "Tem Certeza" } %> |
-<%= link_to 'Voltar a listagem de Serviços', services_path %>
+<div id="page-content">
+  <h2 class="text-center mt-4"><%= @service.title %></h2>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded border border-secondary">
+          <div class="card-header font-italic">
+            Criado por <%= @service.user.name %>
+          </div>
+          <div class="card-body border-secondary">
+            <div class="card-text text-left"><%= simple_format(@service.description) %></div>
+            <%= link_to "Edit", edit_service_path(@service), class: "btn btn-outline-info" %>
+            <%= link_to "Delete", service_path(@service), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+          </div>
+          <div class="card-footer text-muted">
+            <small>Created <%= time_ago_in_words(@service.created_at) %> ago, 
+            edited <%= time_ago_in_words(@service.updated_at) %> ago</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -16,7 +16,7 @@
 
     <div class="form-group">
       <%= f.label :telefone %>
-      <em class="form-text text-muted">(apenas numeros)</em><br />
+      <em class="form-text text-muted">((DDD)Número))</em><br />
       <%= f.telephone_field :phone_number, autocomplete: "Digite telefone", pattern: '\([0-9]{2}\)[0-9]{4,6}-?[0-9]{3,4}$', class: 'form-control'%>
     </div>
 

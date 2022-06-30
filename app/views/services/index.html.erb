@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="card-footer text-success fs-5">
-        <small><%= ActionController::Base.helpers.number_to_currency(service.preco, :unit => "R$ ", :separator => ",", :delimiter => ".") %></small>
+        <small><%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></small>
       </div>
     </div>
   <% end %>
