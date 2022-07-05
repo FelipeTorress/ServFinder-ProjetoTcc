@@ -5,12 +5,16 @@
       <div class="col-8 mt-4">
         <div class="card text-center shadow mb-5 bg-white rounded border border-secondary">
           <div class="card-header font-italic">
-            Criado por <%= @service.user.name %>
+            Criado por <%= link_to @service.user.name, user_path(@service.user) %>
           </div>
           <div class="card-body border-secondary">
             <div class="card-text text-left"><%= simple_format(@service.description) %></div>
-            <%= link_to "Edit", edit_service_path(@service), class: "btn btn-outline-info" %>
-            <%= link_to "Delete", service_path(@service), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+            <div class="card-text text-left"><%= @service.limit_date %></div>
+            <div class="card-text text-left"><%= ActionController::Base.helpers.number_to_currency(@service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></div>
+            <div class="mt-5 mb-2">
+              <%= link_to "Edit", edit_service_path(@service), class: "btn btn-outline-info" %>
+              <%= link_to "Delete", service_path(@service), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+            </div>
           </div>
           <div class="card-footer text-muted">
             <small>Created <%= time_ago_in_words(@service.created_at) %> ago, 

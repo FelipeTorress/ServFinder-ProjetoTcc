@@ -17,13 +17,17 @@
           <%= fa_icon 'bars' %>&nbsp&nbsp<%= fa_icon 'user' %>
         </a>
         <ul class="dropdown-menu rounded-3" aria-labelledby="navbarDropdown" >
-          <li><a class="dropdown-item" href=<%="#{new_user_session_path}"%>>Entrar/Cadastrar-se</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href=<%="#{new_service_path}"%>>Criar Novo Serviço</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href=<%="#{edit_user_registration_path}"%>>Editar Perfil</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <%= link_to("Sair", destroy_user_session_path, class: "dropdown-item", method: :delete)%>
+          <% if user_signed_in? %>
+            <li><a class="dropdown-item" href=<%="#{new_service_path}"%>>Criar Novo Serviço</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href=<%="#{user_path(current_user)}"%>>Meus Serviços</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href=<%="#{edit_user_registration_path}"%>>Editar Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <%= link_to("Sair", destroy_user_session_path, class: "dropdown-item", method: :delete)%>
+          <% else %>
+            <li><a class="dropdown-item" href=<%="#{new_user_session_path}"%>>Entrar/Cadastrar-se</a></li>
+          <% end %>
         </ul>
     </div>
   </div>

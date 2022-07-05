@@ -1,0 +1,49 @@
+<div class="user-div" >
+    <h1><%= @user == current_user ? "Seu Perfil" : "Perfil de #{@user.name}"%></h1>
+
+    <img src=<%= asset_path('user_img.jpg') %> class="profile-photo rounded rounded-3 shadow" alt="foto">
+
+    <div class="text-center" id="account-options">
+    <% if user_signed_in? %> 
+        <% if @user == current_user %>
+        <%= link_to 'Editar Perfil', edit_user_registration_path(@user), class: "btn btn-info" %>
+        <%= link_to 'Deletar Perfil', registration_path(@user), data: { confirm: t('.are_you_sure') }, method: :delete, class: "btn btn-danger" %>
+        <% end %>    
+    <% end %>
+    </div>
+
+    <h3 class="my-5"><%= @user == current_user ? "Seus Serviços:" : "Serviços do Usuário:"%></h3>
+    <% if @user.services.length > 0 %>
+        <div class="container" id="cards-width">
+        <% @user.services.each do |service| %>
+            <div class="card text-center shadow p-1 bg-body rounded rounded-3 border border-primary mt-5" id="cards">
+            <div class="card-body">
+                <div class="card-header shadow rounded rounded-1">
+                <h5 class="card-title" ><%= link_to service.title, service_path(service), class: "text-success" %></h5>
+                </div>
+                <p class="card-text"><%= truncate(service.description, length:100) %></p>
+                <div class="card-text text-left"><%= service.limit_date %></div>
+                <div class="card-text text-left"><%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></div>
+                <%= link_to 'Visualizar', service_path(service), class: "btn btn-success" %>
+                <% if user_signed_in? && ( @user == current_user ) %>
+                <%= link_to 'Editar', edit_service_path(service), class: "btn btn-info" %>
+                <%= link_to 'Deletar', service_path(service), class: "btn btn-danger" , data: { "turbo-method": :delete , "turbo-confirm": "Você tem certeza que deseja deletar esse artigo?"} %>
+                <% end %>
+            </div>
+
+            <div class="card-footer text-muted" id="card-div">
+                <small>
+                Criado em <%= time_ago_in_words(service.created_at) %>,
+                Editado em  <%= time_ago_in_words(service.updated_at) %> 
+                </small>
+            </div>
+            </div>
+        <% end %>
+        </div>
+    <% else %>
+        <h4><%= @user == current_user ? "Você não possui Serviços cadastrados" : "Esse usuário não possui serviços cadastrados"%></h4>
+        <% if user_signed_in? && ( @user == current_user ) %>
+            <%= button_to "Criar novo serviço", new_service_path, class: "btn btn-primary"  %>
+        <% end %>
+    <% end %>
+</div>
