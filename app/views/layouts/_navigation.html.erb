@@ -8,7 +8,8 @@
     </a>
     <div class="shadow p-1 bg-body rounded rounded-pill border border-primary" id="search-navbar">
       <form class="d-flex">
-        <input class="form-control me-2 rounded-pill" type="search" placeholder="O Que Você Busca" aria-label="Search">
+        <a href=<%= "#{users_path}"%>><button class="btn btn-primary rounded-pill text-center"><%= fa_icon 'globe' %></button></a>
+        <input class="form-control mx-2 rounded-pill" type="search" placeholder="O Que Você Busca" aria-label="Search">
         <button class="btn btn-outline-primary rounded-pill text-center" type="submit"><%= fa_icon 'search' %></button>
       </form>
     </div>

@@ -5,8 +5,7 @@ class ServicesController < ApplicationController
   end
 
   def index
-    #@articles = Article.paginate(page: params[:page], per_page: 5)
-    @service = Service.all
+    @service = Service.paginate(page: params[:page], per_page: 19)
   end
 
   def new

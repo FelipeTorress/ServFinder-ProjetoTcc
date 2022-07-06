@@ -1,0 +1,45 @@
+<div class="user-div" >
+
+    <div class="text-center" id="account-options">
+    <% if user_signed_in? %> 
+        <% if @user == current_user %>
+        <%= link_to 'Editar Perfil', edit_user_registration_path(@user), class: "btn btn-info" %>
+        <%= link_to 'Deletar Perfil', registration_path(@user), data: { confirm: t('.are_you_sure') }, method: :delete, class: "btn btn-danger" %>
+        <% end %>    
+    <% end %>
+    </div>
+
+    <% if @users.length > 0 %>
+        <div class="container" id="cards-width">
+        <% @users.each do |user| %>
+            <div class="card text-center shadow p-1 bg-body rounded rounded-3 border border-primary mt-5" id="cards">
+                <img src=<%= asset_path('user_img.jpg') %> class="profile-photo rounded rounded-3 shadow" alt="foto">
+                <div class="card-body">
+                    <div class="card-header shadow rounded rounded-1">
+                    <h5 class="card-title" ><%= link_to user.name, user_path(user), class: "text-success" %></h5>
+                    </div>
+                    <p class="card-text">
+                        <%= fa_icon 'envelope' %>
+                        <%= user.email %>
+                    </p>
+                    <p class="card-text">
+                        <%= fa_icon 'phone' %>
+                        <%=user.phone_number %>
+                    </p>
+                    <p><%= pluralize(user.services.count, "serviço")%></p>
+                    <%= link_to 'Visualizar', user_path(user), class: "btn btn-success" %>
+                    <% if user_signed_in? && ( user == current_user ) %>
+                        <%= link_to 'Editar Perfil', edit_user_registration_path(user), class: "btn btn-info" %>
+                    <% end %>
+                </div>
+
+                <div class="card-footer text-muted" id="card-div">
+                    <p class="card-text">nota</p>
+                </div>
+            </div>
+        <% end %>
+        </div>
+    <% else %>
+        <h4>Ops... Ocorreu um erro com essa pagina, tenha paciencia que iremos arrumar para você!</h4>
+    <% end %>
+</div>
