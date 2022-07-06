@@ -13,9 +13,9 @@
     </div>
 
     <h3 class="my-5"><%= @user == current_user ? "Seus Serviços:" : "Serviços do Usuário:"%></h3>
-    <% if @user.services.length > 0 %>
+    <% if @services.length > 0 %>
         <div class="container" id="cards-width">
-        <% @user.services.each do |service| %>
+        <% @services.each do |service| %>
             <div class="card text-center shadow p-1 bg-body rounded rounded-3 border border-primary mt-5" id="cards">
             <div class="card-body">
                 <div class="card-header shadow rounded rounded-1">
@@ -46,4 +46,9 @@
             <%= button_to "Criar novo serviço", new_service_path, class: "btn btn-primary"  %>
         <% end %>
     <% end %>
+</div>
+<div class="flickr_pagination d-flex justify-content-center my-4">
+  <div class="text-center">
+    <%= will_paginate @services, :container => false, class: "shadow" %>
+  </div>
 </div>

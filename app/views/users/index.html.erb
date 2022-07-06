@@ -43,3 +43,8 @@
         <h4>Ops... Ocorreu um erro com essa pagina, tenha paciencia que iremos arrumar para você!</h4>
     <% end %>
 </div>
+<div class="flickr_pagination d-flex justify-content-center my-4">
+  <div class="text-center">
+    <%= will_paginate @users, :container => false, class: "shadow" %>
+  </div>
+</div>

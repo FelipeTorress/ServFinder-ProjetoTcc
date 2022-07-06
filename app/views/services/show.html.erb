@@ -11,10 +11,12 @@
             <div class="card-text text-left"><%= simple_format(@service.description) %></div>
             <div class="card-text text-left"><%= @service.limit_date %></div>
             <div class="card-text text-left"><%= ActionController::Base.helpers.number_to_currency(@service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></div>
-            <div class="mt-5 mb-2">
-              <%= link_to "Edit", edit_service_path(@service), class: "btn btn-outline-info" %>
-              <%= link_to "Delete", service_path(@service), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
-            </div>
+            <% if user_signed_in? && ( @service.user == current_user)%>
+              <div class="mt-5 mb-2">
+                <%= link_to "Edit", edit_service_path(@service), class: "btn btn-outline-info" %>
+                <%= link_to "Delete", service_path(@service), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+              </div>
+            <% end %>
           </div>
           <div class="card-footer text-muted">
             <small>Created <%= time_ago_in_words(@service.created_at) %> ago, 
@@ -24,4 +26,4 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
