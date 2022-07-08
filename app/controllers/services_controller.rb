@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   before_action :search_article, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   def show
   end
 

@@ -1,12 +1,15 @@
 @import 'bootstrap';
 //alterar css do bootstrap
 .navbar-brand{
-    width: 3rem;
-    margin-left: 4rem;
+  width: 3rem;
+  margin-left: 4rem;
 }
 
 .form-group{
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  a :hover{
+    color: white;
+  }
 }
 
 .flickr_pagination {

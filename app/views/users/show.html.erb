@@ -26,8 +26,8 @@
                 <div class="card-text text-left"><%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></div>
                 <%= link_to 'Visualizar', service_path(service), class: "btn btn-success" %>
                 <% if user_signed_in? && ( @user == current_user ) %>
-                <%= link_to 'Editar', edit_service_path(service), class: "btn btn-info" %>
-                <%= link_to 'Deletar', service_path(service), class: "btn btn-danger" , data: { "turbo-method": :delete , "turbo-confirm": "Você tem certeza que deseja deletar esse artigo?"} %>
+                    <%= link_to 'Editar', edit_service_path(service), class: "btn btn-info" %>
+                    <%= link_to 'Deletar', service_path(service), class: "btn btn-danger" , method: :delete, data: {confirm: "Are you sure?"} %>
                 <% end %>
             </div>
 
