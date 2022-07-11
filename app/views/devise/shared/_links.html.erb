@@ -1,6 +1,14 @@
 <div class="form-group">
   <%- if controller_name != 'sessions' %>
-    <%= link_to t(".sign_in"), new_session_path(resource_name) %><br />
+    <a href=<%= "#{new_session_path(resource_name)}" %>>
+      <button
+        type="button"
+        class="btn btn-outline-primary shadow text-decoration-none mb-3" 
+      >
+        <%= fa_icon 'arrow-left'%>
+        <%= t(".sign_in") %>
+      </button>
+    </a><br />
   <% end -%>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
