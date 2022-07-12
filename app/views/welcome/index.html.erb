@@ -1,16 +1,13 @@
-<div class="welcome-background">
-    <div class="container shadow rounded welcome-banner border border-primary">
-        <h1>Bem Vindo a ServFinder</h1>
-        <p>Aqui você pode ecnontrar um serviço que precisa ou realizar um!</p>
-        <hr>
-        <p>
-        Nosso site procura conectar pessoas que precisam de um serviço e pessoas que possuem capacidade de
-        realizar tais necessidades. Nosso foco é de alavancar trabalhadores autonomos e ajudar na resolução de 
-        demandas especificas de pessoas que precisam de serviços de trabalhadores especializados.
-        </p>
+<main class="contentContainer">
+  <section class="hero">
+    <span>👏️ Bem Vindo a ServFinder</span>
+    <h1>Encontre ou Realize um <span>Serviço</span></h1>
+    <p>
+      Entre ou cadastre-se <br />
+      <span>É de Graça!</span>
+    </p>
+    <%= button_to "Clique aqui para começar!", new_user_session_path, class:"btn btn-primary" %>
+  </section>
 
-        <h4>Entre ou cadastre-se</h4>
-        <h3>É de Graça!</h3>
-        <%= button_to "Clique aqui para começar!", new_user_session_path, class:"btn btn-primary" %>
-    </div>
-</div>
+  <img src=<%= "#{asset_path('hand_shake.png')}" %> alt="Girl coding" style="max-width:450px;"/>
+</main>
