@@ -22,6 +22,10 @@ body{
   padding-top: 30px;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
+  background-color: #f0f2f5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html{
@@ -33,6 +37,9 @@ html{
     @media(max-width: 720px){
         font-size: 87.5%;
     }
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4, h5, h6, strong {
@@ -50,7 +57,7 @@ h1, h2, h3, h4, h5, h6, strong {
 
 .icon-navbar-custom{
     display: flex;
-    height: 2.2rem
+    height: 2.2rem;
 }
 
 #search-navbar{
@@ -77,18 +84,6 @@ h1, h2, h3, h4, h5, h6, strong {
 .centralizar-form-newservice{
     width: 70%;
     margin: 10px auto;
-}
-
-.welcome-banner{
-    margin-top: 75px;
-    width: 60%;
-    height: 80vh; 
-    overflow:hidden;
-    background-color: rgba($color: #ffffff18, $alpha: .1);
-    p{
-      text-justify: inter-word;
-      color: black;
-    }
 }
 
 .welcome-background{
