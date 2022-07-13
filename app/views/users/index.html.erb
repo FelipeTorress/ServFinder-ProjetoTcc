@@ -18,9 +18,9 @@
                     </p>
                     <div style="margin-bottom:10px;">
                         <p><%= pluralize(user.services.count, "serviço")%> cadastrados</p>
-                        <%= link_to 'Visualizar', user_path(user), class: "btn btn-success" %>
+                        <%= link_to 'Visualizar', user_path(user), class: "btn btn-success rounded-pill" %>
                         <% if user_signed_in? && ( user == current_user ) %>
-                            <%= link_to 'Editar Perfil', edit_user_registration_path(user), class: "btn btn-warning" %>
+                            <%= link_to 'Editar Perfil', edit_user_registration_path(user), class: "btn btn-warning rounded-pill" %>
                         <% end %>
                     </div>
                 </div>

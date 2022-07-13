@@ -6,8 +6,8 @@
     <div class="text-center" id="account-options">
     <% if user_signed_in? %> 
         <% if @user == current_user %>
-        <%= link_to 'Editar Perfil', edit_user_registration_path(@user), class: "btn btn-warning" %>
-        <%= link_to 'Deletar Perfil', registration_path(@user), data: { confirm: t('.are_you_sure') }, method: :delete, class: "btn btn-danger" %>
+        <%= link_to 'Editar Perfil', edit_user_registration_path(@user), class: "btn btn-warning rounded-pill" %>
+        <%= link_to 'Deletar Perfil', registration_path(@user), data: { confirm: t('.are_you_sure') }, method: :delete, class: "btn btn-danger rounded-pill" %>
         <% end %>    
     <% end %>
     </div>
@@ -24,10 +24,10 @@
                 <p class="card-text"><%= truncate(service.description, length:100) %></p>
                 <div class="card-text text-left"><%= service.limit_date %></div>
                 <div class="card-text text-left"><%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></div>
-                <%= link_to 'Visualizar', service_path(service), class: "btn btn-success" %>
+                <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill" %>
                 <% if user_signed_in? && ( @user == current_user ) %>
-                    <%= link_to 'Editar', edit_service_path(service), class: "btn btn-info" %>
-                    <%= link_to 'Deletar', service_path(service), class: "btn btn-danger" , method: :delete, data: {confirm: "Are you sure?"} %>
+                    <%= link_to 'Editar', edit_service_path(service), class: "btn btn-info rounded-pill" %>
+                    <%= link_to 'Deletar', service_path(service), class: "btn btn-danger rounded-pill" , method: :delete, data: {confirm: "Are you sure?"} %>
                 <% end %>
             </div>
 
