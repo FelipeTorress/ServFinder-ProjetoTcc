@@ -131,7 +131,6 @@ h1, h2, h3, h4, h5, h6, strong {
     gap: 1rem;
 }
 
-
 .card-buttons{
     justify-content: space-between;
     flex-direction: row;
@@ -202,4 +201,10 @@ h1, h2, h3, h4, h5, h6, strong {
     margin: 0px auto;
     color:green;
     font-size: 1.4rem;
+}
+
+.width-shape{
+    width: auto;
+    padding: 0px 10px;
+    margin: 0px auto;
 }

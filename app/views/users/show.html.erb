@@ -1,12 +1,12 @@
 <div class="user-div" >
     <h1><%= @user == current_user ? "Seu Perfil" : "Perfil de #{@user.name}"%></h1>
 
-    <img src=<%= asset_path('user_img.jpg') %> class="profile-photo rounded rounded-3 shadow" alt="foto">
+    <img src=<%= asset_path('user_img.jpg') %> class="profile-photo rounded-circle shadow" alt="foto">
 
     <div class="text-center" id="account-options">
     <% if user_signed_in? %> 
         <% if @user == current_user %>
-        <%= link_to 'Editar Perfil', edit_user_registration_path(@user), class: "btn btn-info" %>
+        <%= link_to 'Editar Perfil', edit_user_registration_path(@user), class: "btn btn-warning" %>
         <%= link_to 'Deletar Perfil', registration_path(@user), data: { confirm: t('.are_you_sure') }, method: :delete, class: "btn btn-danger" %>
         <% end %>    
     <% end %>
