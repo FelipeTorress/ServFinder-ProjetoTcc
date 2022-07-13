@@ -16,18 +16,20 @@
     <% if @services.length > 0 %>
         <div class="container" id="cards-width">
         <% @services.each do |service| %>
-            <div class="card text-center shadow p-1 bg-body rounded rounded-3 border border-primary mt-5" id="cards">
+            <div class="card text-center shadow p-1 bg-body rounded border border-dark mt-5" id="cards">
             <div class="card-body">
-                <div class="card-header shadow rounded rounded-1">
-                <h5 class="card-title" ><%= link_to service.title, service_path(service), class: "text-success" %></h5>
+                <div class="card-header shadow rounded-pill border border-primary">
+                    <h5 class="card-title" ><%= link_to service.title, service_path(service), class: "text-primary text-decoration-none" %></h5>
                 </div>
-                <p class="card-text"><%= truncate(service.description, length:100) %></p>
+                <p class="card-text mt-2"><%= service.description %></p>
                 <div class="card-text text-left"><%= service.limit_date %></div>
                 <div class="card-text text-left"><%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></div>
-                <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill" %>
                 <% if user_signed_in? && ( @user == current_user ) %>
-                    <%= link_to 'Editar', edit_service_path(service), class: "btn btn-info rounded-pill" %>
-                    <%= link_to 'Deletar', service_path(service), class: "btn btn-danger rounded-pill" , method: :delete, data: {confirm: "Are you sure?"} %>
+                    <%= link_to 'Editar', edit_service_path(service), class: "btn btn-warning rounded-pill shadow" %>
+                    <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill shadow" %>
+                    <%= link_to 'Deletar', service_path(service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
+                <% else %>
+                    <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill shadow" %>
                 <% end %>
             </div>
 
