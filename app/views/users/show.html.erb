@@ -15,32 +15,49 @@
     <h3 class="my-5"><%= @user == current_user ? "Seus Serviços:" : "Serviços do Usuário:"%></h3>
     <% if @services.length > 0 %>
         <div class="container" id="cards-width">
-        <% @services.each do |service| %>
-            <div class="card text-center shadow p-1 bg-body rounded border border-dark mt-5" id="cards">
-            <div class="card-body">
-                <div class="card-header shadow rounded-pill border border-primary">
-                    <h5 class="card-title" ><%= link_to service.title, service_path(service), class: "text-primary text-decoration-none" %></h5>
-                </div>
-                <p class="card-text mt-2"><%= service.description %></p>
-                <div class="card-text text-left"><%= service.limit_date %></div>
-                <div class="card-text text-left"><%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></div>
-                <% if user_signed_in? && ( @user == current_user ) %>
-                    <%= link_to 'Editar', edit_service_path(service), class: "btn btn-warning rounded-pill shadow" %>
-                    <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill shadow" %>
-                    <%= link_to 'Deletar', service_path(service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
-                <% else %>
-                    <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill shadow" %>
-                <% end %>
-            </div>
+            <% @services.each do |service| %>
+                <div class="card text-center shadow p-1 bg-body rounded border border-dark mt-5" id="cards">
+                <div class="card-body">
+                    <div class="card-header shadow rounded-pill border border-primary">
+                        <h5 class="card-title" ><%= link_to service.title, service_path(service), class: "text-primary text-decoration-none" %></h5>
+                    </div>
 
-            <div class="card-footer text-muted" id="card-div">
-                <small>
-                Criado em <%= time_ago_in_words(service.created_at) %>,
-                Editado em  <%= time_ago_in_words(service.updated_at) %> 
-                </small>
-            </div>
-            </div>
-        <% end %>
+                    <p class="card-text mt-2"><%= service.description %></p>
+
+                    <div class="hstack gap-3 d-flex justify-content-center mb-3">
+                        <% if service.limit_date %>
+                            <div>
+                                <h6 class="mt-3">Realizar Ate:<h6>
+                                <div class="card-text text-left" style="font-size:1.3rem;">
+                                    <%= service.limit_date.strftime("%d/%m/%Y") %>
+                                </div>
+                            </div>
+                        <% end %>
+
+                        <div>
+                            <h6 class="mt-3">Remuneração:<h6>
+                            <div class="text-success" style="font-size:1.4rem;">
+                                <%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <% if user_signed_in? && ( @user == current_user ) %>
+                        <%= link_to 'Editar', edit_service_path(service), class: "btn btn-warning rounded-pill shadow" %>
+                        <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill shadow" %>
+                        <%= link_to 'Deletar', service_path(service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
+                    <% else %>
+                        <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill shadow" %>
+                    <% end %>
+                </div>
+
+                <div class="card-footer text-muted" id="card-div">
+                    <small>
+                    Criado a <%= time_ago_in_words(service.created_at) %>
+                    </small>
+                </div>
+                </div>
+            <% end %>
         </div>
     <% else %>
         <h4><%= @user == current_user ? "Você não possui Serviços cadastrados" : "Esse usuário não possui serviços cadastrados"%></h4>
@@ -49,6 +66,7 @@
         <% end %>
     <% end %>
 </div>
+
 <div class="flickr_pagination d-flex justify-content-center my-4">
   <div class="text-center">
     <%= will_paginate @services, :container => false, class: "shadow" %>
