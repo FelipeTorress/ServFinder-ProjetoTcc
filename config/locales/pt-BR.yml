@@ -242,13 +242,17 @@ pt-BR:
         sign_up: "Criar Conta"
         sign_in: "Entrar na Conta"
         forgot_your_password: "Esqueceu sua Senha"
-  errors:
-    messages:
-      already_confirmed: "já foi confirmado"
-      confirmation_period_expired: "precisa ser confirmada em até %{period}, por favor, solicite uma nova"
-      expired: "expirou, por favor, solicite uma nova"
-      not_found: "não encontrado"
-      not_locked: "não foi bloqueado"
-      not_saved:
-        one: "Não foi possível salvar %{resource}: 1 erro"
-        other: "Não foi possível salvar %{resource}: %{count} erros."
+    errors:
+      messages:
+        already_confirmed: "já foi confirmado"
+        confirmation_period_expired: "precisa ser confirmada em até %{period}, por favor, solicite uma nova"
+        expired: "expirou, por favor, solicite uma nova"
+        not_found: "não encontrado"
+        not_locked: "não foi bloqueado"
+        not_saved:
+          one: "Não foi possível salvar %{resource}: 1 erro"
+          other: "Não foi possível salvar %{resource}: %{count} erros."
+  
+  will_paginate:
+    next_label: "Próximo"
+    previous_label: "Anterior"
