@@ -1,6 +1,6 @@
 <div class="card-service rounded">
   <% @service.each do |service| %>
-    <div class="card border-secondary mb-3 mt-3 rounded-3" style="width: 18rem;">
+    <div class="card border-secondary mb-3 mt-3 rounded-3" style="width: 18rem;height:360px;">
       <small class="rounded rounded-pill shadow border border-success value-card">
         <%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
       </small>

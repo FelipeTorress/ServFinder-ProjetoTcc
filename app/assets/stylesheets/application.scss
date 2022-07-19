@@ -17,6 +17,7 @@
 
  //alterar css da aplicação
 
+//gobal
 body{
   padding-bottom: 20px;
   padding-top: 30px;
@@ -46,6 +47,11 @@ h1, h2, h3, h4, h5, h6, strong {
   font-weight: 600;
 }
 
+.shape-color{
+    background-color: #f0f2f5;
+}
+
+//navbar 
 .nav-fixed{
     position: fixed;
     width: 100%;
@@ -65,6 +71,7 @@ h1, h2, h3, h4, h5, h6, strong {
     height: 10%;
 }
 
+
 #user-pill {
     margin-right: 4rem;
 }
@@ -73,6 +80,7 @@ h1, h2, h3, h4, h5, h6, strong {
     margin-top: 20px;
 }
 
+//devise 
 .form-devise{
     width: 30%;
     @media (max-width: 800px){
@@ -102,10 +110,7 @@ h1, h2, h3, h4, h5, h6, strong {
     background-size: cover;
 }
 
-.shape-color{
-    background-color: #f0f2f5;
-}
-
+//footer
 #sticky-footer {
     position:fixed;
     bottom:0;
@@ -123,6 +128,7 @@ h1, h2, h3, h4, h5, h6, strong {
     }
 }
 
+//card de servicos
 .card-service{
     display: grid;
     justify-content: center;
