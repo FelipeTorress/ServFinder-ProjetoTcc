@@ -12,6 +12,35 @@
     <% end %>
     </div>
 
+    <div class="text-center" style="margin-top:10px">
+        <h5>Contato:</h5>
+        <% if @user.permit_phone_number || @user.permit_email %>
+            <% if @user.permit_email %>
+                <p class="card-text" style="margin-top:10px">
+                    <%= fa_icon 'envelope' %>
+                    <%= @user.email %>
+                </p>
+            <% end %>
+            <% if @user.permit_phone_number %>
+                <p class="card-text">
+                    <%= fa_icon 'phone' %>
+                    <%= @user.phone_number %>
+                </p>
+            <% end %>
+        <% else %>
+            <p>Esse usuário não compartilha seus dados de contato</p>
+        <% end %>
+
+        <h5>Nota do Usuário:</h5>
+        <p class="card-text">
+            <% if @user.score.nil? %>
+                Sem Avaliações
+            <% else %>
+                <%= @user.score %>
+            <% end %>
+        </p>
+    </div>    
+
     <h3 class="my-5"><%= @user == current_user ? "Seus Serviços:" : "Serviços do Usuário:"%></h3>
     <% if @services.length > 0 %>
         <div class="container" id="cards-width">
