@@ -221,4 +221,20 @@ h1, h2, h3, h4, h5, h6, strong {
         width: 60%;
     }
     margin: 10px auto;
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    h3 {
+        margin-top: 2rem;
+    }
+
+    ul {
+        text-align: start;
+    }
+
+    p {
+        text-align: justify;
+    }
 }
