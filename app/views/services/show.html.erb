@@ -1,3 +1,25 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Gostaria de deixar uma mensagem para o Contratante? (opicional)
+      </div>
+      <%= form_with(model: @user_service, class: "p-3 mb-3 rounded", local: true) do |f| %>
+        <%= f.text_area :comment, class: "form-control rounded", placeholder: "Sua Mensagem",style: "height:100px;resize:none;"%>
+        <%= f.hidden_field :service, value: @user_service.service.id %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <%= f.submit('Confirmar', class: "btn btn-primary") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <div id="page-content">
   <h2 class="text-center mt-4"><%= @service.title %></h2>
   <div class="container">
@@ -32,6 +54,10 @@
               <% if user_signed_in? && ( @service.user == current_user ) %>
                   <%= link_to 'Editar', edit_service_path(@service), class: "btn btn-warning rounded-pill shadow" %>
                   <%= link_to 'Deletar', service_path(@service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
+              <% elsif  user_signed_in? && !current_user.isContratante %>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Inscrever-se
+                </button>
               <% end %>
           </div>       
           <div class="card-footer text-muted">

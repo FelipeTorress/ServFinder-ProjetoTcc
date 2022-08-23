@@ -1,8 +1,10 @@
 class ServicesController < ApplicationController
   before_action :search_article, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  
+
   def show
+    @user_service = UserService.new
+    @user_service.service = Service.find(params[:id])
   end
 
   def index
@@ -25,9 +27,7 @@ class ServicesController < ApplicationController
     end
   end
 
-
-  def edit
-  end
+  def edit; end
 
   def update
     if @service.update(service_params)
@@ -43,13 +43,13 @@ class ServicesController < ApplicationController
     redirect_to services_path
   end
 
-  private 
+  private
 
   def service_params
-    return params.require(:service).permit(:title, :description, :limit_date, :value)
+    params.require(:service).permit(:title, :description, :limit_date, :value)
   end
 
   def search_article
-    return @service = Service.find(params[:id])
+    @service = Service.find(params[:id])
   end
 end
