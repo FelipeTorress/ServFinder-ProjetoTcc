@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_services
   root 'welcome#index'
   get 'policy/index'
   get 'terms/index'
