@@ -1,10 +1,13 @@
 class ServicesController < ApplicationController
-  before_action :search_article, only: [:show, :edit, :update, :destroy]
+  before_action :search_service, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
   def show
     @user_service = UserService.new
     @user_service.service = Service.find(params[:id])
+
+    # @prestadores = UserService.find(:all, conditions: ['service = ?', params[:id].to_s])
+    @prestadores = UserService.where(service: params[:id])
   end
 
   def index
@@ -49,7 +52,7 @@ class ServicesController < ApplicationController
     params.require(:service).permit(:title, :description, :limit_date, :value)
   end
 
-  def search_article
+  def search_service
     @service = Service.find(params[:id])
   end
 end

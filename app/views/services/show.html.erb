@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Realizando Inscrição</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -16,6 +16,39 @@
           <%= f.submit('Confirmar', class: "btn btn-primary") %>
         </div>
       <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Encerrando Anúncio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Para encerrar o chamado voce deve selecionar um Prestador:
+        <div>
+          <% @prestadores.each do |prestador| %>
+            <div class="card mt-3">
+              <a 
+                href="<%= user_path(prestador.user)%>"
+                target="_blank"
+                class="text-decoration-none"
+              >
+                <h5 class="card-header"><%= prestador.user.name %></h5>
+              </a>
+              <div class="card-body">
+                <h6 class="card-title">Nota do usuário: <%= prestador.user.score %></h6>
+                <h6>Comentário do Usuário:</h6>
+                <p class="card-text"><%= prestador.comment %></p>
+                <a href="#" class="btn btn-primary">Escolher Usuário</a>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -53,6 +86,9 @@
               
               <% if user_signed_in? && ( @service.user == current_user ) %>
                   <%= link_to 'Editar', edit_service_path(@service), class: "btn btn-warning rounded-pill shadow" %>
+                  <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    Finalizar Serviço
+                  </button>
                   <%= link_to 'Deletar', service_path(@service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
               <% elsif  user_signed_in? && !current_user.isContratante %>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
