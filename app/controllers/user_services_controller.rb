@@ -17,6 +17,17 @@ class UserServicesController < ApplicationController
     redirect_to service_path(service)
   end
 
+  def update
+    service = Service.find(user_service_service)
+    service.user_selected_id = user_service_prestador
+    if service.save
+      flash[:notice] = 'Prestador Selecionado! Entre em contato ou aguarde.'
+    else
+      flash[:alert] = 'Ocorreu um erro! Tente novamente mais tarde.'
+    end
+    redirect_to service_path(service)
+  end
+
   private
 
   def user_service_comment
@@ -25,5 +36,9 @@ class UserServicesController < ApplicationController
 
   def user_service_service
     params.require(:user_service).permit(:service)[:service]
+  end
+
+  def user_service_prestador
+    params.require(:user_service).permit(:prestador)[:prestador]
   end
 end
