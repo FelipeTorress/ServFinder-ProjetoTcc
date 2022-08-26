@@ -21,7 +21,7 @@
         <h6 class="card-title"><%= service.title %></h6>
         <p class="card-text"><%= truncate(service.description, length: 70) %></p>
         <div class="card-buttons mt-auto">
-          <% if user_signed_in? && ( service.user == current_user)%>
+          <% if user_signed_in? && ( service.user == current_user) && service.user_selected_id.nil? %>
             <a href=<%= "#{edit_service_path(service)}"%> class="btn btn-warning rounded rounded-pill"><%= fa_icon 'wrench' %></a>
             <a href=<%= "#{service_path(service)}"%> class="btn btn-primary rounded rounded-pill">Mais Detalhes</a>
             <%= link_to (fa_icon 'trash'), service_path(service), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger rounded rounded-pill" %>

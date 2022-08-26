@@ -30,26 +30,30 @@
       <div class="modal-body">
         Para encerrar o chamado voce deve selecionar um Prestador:
         <div>
-          <% @prestadores.each do |prestador| %>
-            <div class="card mt-3">
-              <a 
-                href="<%= user_path(prestador.user)%>"
-                target="_blank"
-                class="text-decoration-none"
-              >
-                <h5 class="card-header"><%= prestador.user.name %></h5>
-              </a>
-              <div class="card-body">
-                <h6 class="card-title">Nota do usuário: <%= prestador.user.score %></h6>
-                <h6>Comentário do Usuário:</h6>
-                <p class="card-text"><%= prestador.comment %></p>
-                <%= form_with(model: prestador, class: "p-3 mb-3 rounded", local: true) do |f| %>
-                  <%= f.hidden_field :service, value: @user_service.service.id %>
-                  <%= f.hidden_field :prestador, value: prestador.user.id %>
-                  <%= f.submit('Escolher Usuário', class: "btn btn-primary", data: {confirm: "Você não poderá trocar de Prestador ao confirmar sua escolha, tem certeza que quer escolhe-lo?"}, method: :edit) %>
-                <% end %>
+          <% if @prestadores.size > 0 %>
+            <% @prestadores.each do |prestador| %>
+              <div class="card mt-3">
+                <a 
+                  href="<%= user_path(prestador.user)%>"
+                  target="_blank"
+                  class="text-decoration-none"
+                >
+                  <h5 class="card-header"><%= prestador.user.name %></h5>
+                </a>
+                <div class="card-body">
+                  <h6 class="card-title">Nota do usuário: <%= prestador.user.score %></h6>
+                  <h6>Comentário do Usuário:</h6>
+                  <p class="card-text"><%= prestador.comment %></p>
+                  <%= form_with(model: prestador, class: "p-3 mb-3 rounded", local: true) do |f| %>
+                    <%= f.hidden_field :service, value: @user_service.service.id %>
+                    <%= f.hidden_field :prestador, value: prestador.user.id %>
+                    <%= f.submit('Escolher Usuário', class: "btn btn-primary", data: {confirm: "Você não poderá trocar de Prestador ao confirmar sua escolha, tem certeza que quer escolhe-lo?"}, method: :edit) %>
+                  <% end %>
+                </div>
               </div>
-            </div>
+            <% end %>
+          <% else %>
+            <h5 class="mt-3">Ainda não há Inscrições para esse Serviço</h5>
           <% end %>
         </div>
       </div>
@@ -87,15 +91,14 @@
                       </div>
                   </div>
               </div>
-              
               <% if user_signed_in? && ( @service.user == current_user ) %>
-                  <%= link_to 'Editar', edit_service_path(@service), class: "btn btn-warning rounded-pill shadow" %>
                   <% if @service.user_selected_id.nil? %>
+                    <%= link_to 'Editar', edit_service_path(@service), class: "btn btn-warning rounded-pill shadow" %>
                     <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                       Finalizar Serviço
                     </button>
+                    <%= link_to 'Deletar', service_path(@service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
                   <% end %>
-                  <%= link_to 'Deletar', service_path(@service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
               <% elsif  user_signed_in? && !current_user.isContratante && @service.user_selected_id.nil? %>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Inscrever-se
