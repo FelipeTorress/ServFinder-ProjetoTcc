@@ -6,8 +6,9 @@ class ServicesController < ApplicationController
     @user_service = UserService.new
     @user_service.service = Service.find(params[:id])
 
-    # @prestadores = UserService.find(:all, conditions: ['service = ?', params[:id].to_s])
+
     @prestadores = UserService.where(service: params[:id])
+    @prestador_escolhido = User.find(@user_service.service.user_selected_id) if @user_service.service.user_selected_id
   end
 
   def index

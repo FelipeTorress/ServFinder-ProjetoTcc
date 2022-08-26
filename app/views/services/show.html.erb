@@ -91,18 +91,28 @@
                       </div>
                   </div>
               </div>
-              <% if user_signed_in? && ( @service.user == current_user ) %>
-                  <% if @service.user_selected_id.nil? %>
-                    <%= link_to 'Editar', edit_service_path(@service), class: "btn btn-warning rounded-pill shadow" %>
-                    <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                      Finalizar Serviço
-                    </button>
-                    <%= link_to 'Deletar', service_path(@service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
-                  <% end %>
+              <% if user_signed_in? && ( @service.user == current_user ) && @service.user_selected_id.nil? %>
+                <%= link_to 'Editar', edit_service_path(@service), class: "btn btn-warning rounded-pill shadow" %>
+                <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                  Finalizar Serviço
+                </button>
+                <%= link_to 'Deletar', service_path(@service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
               <% elsif  user_signed_in? && !current_user.isContratante && @service.user_selected_id.nil? %>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Inscrever-se
                 </button>
+              <% end %>
+
+              <% unless @service.user_selected_id.nil? %>
+                <div class="text-center">
+                  <h4>Prestador Selecionado:</h4>
+                  <%= link_to @prestador_escolhido.name, user_path(@prestador_escolhido) %><br>
+                  <img 
+                    src=<%= asset_path('user_img.jpg') %> 
+                    class="profile-photo rounded rounded-circle shadow" 
+                    style="max-width:100px;"
+                  >
+                <div>
               <% end %>
           </div>       
           <div class="card-footer text-muted">
