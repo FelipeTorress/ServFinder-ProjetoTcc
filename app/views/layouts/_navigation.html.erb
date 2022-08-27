@@ -25,6 +25,17 @@
               <li><a class="dropdown-item" href=<%="#{new_service_path}"%>>Criar Novo Serviço</a></li>
               <li><hr class="dropdown-divider"></li>
             <% end %>
+
+            <% ongoing = services_on_going(current_user) %>
+            <% if ongoing.empty? %>
+              <li class="dropdown-item" style="pointer-events: none;">Em Andamento: 0</li>
+            <% else %>
+              <li><a class="dropdown-item" href=<%="#{user_service_path(ongoing)}"%>>
+                Em Andamento: <%= ongoing.size %>
+              </a></li>
+            <% end %>
+
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href=<%="#{user_path(current_user)}"%>>Meu Perfil</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href=<%="#{edit_user_registration_path}"%>>Editar Perfil</a></li>

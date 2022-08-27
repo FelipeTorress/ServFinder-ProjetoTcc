@@ -28,6 +28,10 @@ class UserServicesController < ApplicationController
     redirect_to service_path(service)
   end
 
+  def show
+    @services = Service.where(id: params[:id].split('/'))
+  end
+
   private
 
   def user_service_comment
