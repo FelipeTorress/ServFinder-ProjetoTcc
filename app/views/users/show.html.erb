@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     
-                    <% if user_signed_in? && ( @user == current_user ) %>
+                    <% if user_signed_in? && ( @user == current_user ) && service.user_selected_id.nil? %>
                         <%= link_to 'Editar', edit_service_path(service), class: "btn btn-warning rounded-pill shadow" %>
                         <%= link_to 'Visualizar', service_path(service), class: "btn btn-success rounded-pill shadow" %>
                         <%= link_to 'Deletar', service_path(service), class: "btn btn-danger rounded-pill shadow" , method: :delete, data: {confirm: "Are you sure?"} %>
