@@ -1,0 +1,28 @@
+<div id="cookie-banner" class="shadow border-secondary cookies-card rounded-3">
+    <div class="card">
+        <table>
+            <tr>
+                <td>
+                <div class="card-body">
+                    <h6 class="card-title">Suas preferências de cookies</h6>
+                    <p class="card-text">
+                        Nos utilizamos cookies exclusivamente para proteção de sua conta e para facilitar a navegação 
+                    </p>
+                </div>
+                </td>
+                <td >
+                    <%= form_with(model: current_user, class: "p-3 mb-3 rounded", local: true) do |f| %>
+                        <%= f.hidden_field :id, value: current_user.id %>
+                        <%= f.submit('Aceitar Cookies', class: "btn btn-primary link_form", method: :edit, id: 'cookie-accept') %>
+                    <% end %>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    $("#cookie-accept").on('click', function (){
+        $("#cookie-banner").hide()
+    })
+</script>

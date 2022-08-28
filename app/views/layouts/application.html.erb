@@ -21,6 +21,9 @@
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
+    <% if current_user && !current_user.accepted_cookies %>
+      <%= render 'layouts/cookie' %>
+    <% end %>
     <%= render 'layouts/footer' %>
   </body>
 </html>

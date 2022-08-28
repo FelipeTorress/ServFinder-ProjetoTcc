@@ -12,4 +12,10 @@ class UsersController < ApplicationController
     #mudar a quant de usuarios
     @users = User.paginate(page: params[:page], per_page: 2)
   end
+
+  def update
+    user = User.find(params[:id])
+    user.accepted_cookies = true
+    user.save
+  end
 end
