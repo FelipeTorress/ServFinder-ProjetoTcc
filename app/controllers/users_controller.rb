@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def index
     #mudar para usuarios perto
     #mudar a quant de usuarios
+    @user_geocode = UserPlace.find_by(user: current_user)
     @users = User.paginate(page: params[:page], per_page: 2)
   end
 

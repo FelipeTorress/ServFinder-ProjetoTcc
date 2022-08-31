@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_28_171234) do
+ActiveRecord::Schema.define(version: 2022_08_30_010643) do
+
+  create_table "places", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "state_code"
+    t.string "postal_code"
+    t.string "country"
+    t.string "country_code"
+  end
 
   create_table "services", force: :cascade do |t|
     t.integer "user_id"
@@ -23,6 +35,15 @@ ActiveRecord::Schema.define(version: 2022_08_28_171234) do
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_services_on_title"
     t.index ["user_id"], name: "index_services_on_user_id"
+  end
+
+  create_table "user_places", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "place_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_user_places_on_place_id"
+    t.index ["user_id"], name: "index_user_places_on_user_id"
   end
 
   create_table "user_services", force: :cascade do |t|
