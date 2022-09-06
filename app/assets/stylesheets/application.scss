@@ -238,3 +238,15 @@ h1, h2, h3, h4, h5, h6, strong {
         text-align: justify;
     }
 }
+
+.location-map{
+    height: 500px;
+    @media(max-width: 1080px){
+        width:50%;
+    }
+    @media(max-width: 720px){
+        width:70%;
+    }
+    z-index:1;
+    margin:auto;
+}
