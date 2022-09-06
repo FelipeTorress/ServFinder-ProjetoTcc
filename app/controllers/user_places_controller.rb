@@ -9,10 +9,11 @@ class UserPlacesController < ApplicationController
     end
     user_geocode.place = extract_info_location(user_location(user_lat_and_long).data)
     user_geocode.save
+    redirect_to users_path
   end
 
-  def extract_info_location(location)
-    place = Place.new
+  def extract_info_location(location, place = nil)
+    place ||= Place.new
     place.latitude = location['lat']
     place.longitude = location['lon']
     place.address = location['address']['suburb']
@@ -23,6 +24,13 @@ class UserPlacesController < ApplicationController
     place.country = location['address']['country']
     place.country_code = location['address']['country_code']
     place.save ? place : nil
+  end
+
+  def update
+    user_geocode = UserPlace.find_by(user: current_user)
+    user_geocode.place = extract_info_location(user_location(user_lat_and_long).data, user_geocode.place)
+    user_geocode.save
+    redirect_to users_path
   end
 
   private

@@ -11,7 +11,14 @@ class UsersController < ApplicationController
     #mudar para usuarios perto
     #mudar a quant de usuarios
     @user_geocode = UserPlace.find_by(user: current_user)
-    @users = User.paginate(page: params[:page], per_page: 2)
+
+    return unless @user_geocode
+
+    @user_place = Place.find(@user_geocode.place.id)
+    places_near = Place.near(Place.find(@user_geocode.place.id).address, 10, units: :km).map(&:id)
+    places_near.delete(@user_place.id)
+    users_near = UserPlace.where(place: places_near).map(&:user_id)
+    @users = User.where(id: users_near).paginate(page: params[:page], per_page: 2)
   end
 
   def update
