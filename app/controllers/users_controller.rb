@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     places_near = Place.near(Place.find(@user_geocode.place.id).address, 10, units: :km).map(&:id)
     places_near.delete(@user_place.id)
     users_near = UserPlace.where(place: places_near).map(&:user_id)
-    @users = User.where(id: users_near).paginate(page: params[:page], per_page: 2)
+    @users = User.where(id: users_near, isContratante: !current_user.isContratante).paginate(page: params[:page], per_page: 2)
   end
 
   def update

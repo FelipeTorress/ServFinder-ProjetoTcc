@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_010643) do
+ActiveRecord::Schema.define(version: 2022_09_06_025146) do
 
   create_table "places", force: :cascade do |t|
     t.float "latitude"
@@ -33,8 +33,11 @@ ActiveRecord::Schema.define(version: 2022_08_30_010643) do
     t.decimal "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "finished", default: false
+    t.index ["finished"], name: "index_services_on_finished"
     t.index ["title"], name: "index_services_on_title"
     t.index ["user_id"], name: "index_services_on_user_id"
+    t.index ["user_selected_id"], name: "index_services_on_user_selected_id"
   end
 
   create_table "user_places", force: :cascade do |t|
@@ -74,6 +77,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_010643) do
     t.string "address"
     t.integer "score"
     t.boolean "accepted_cookies"
+    t.boolean "finished", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index [nil], name: "index_users_on_user_selected_id"
