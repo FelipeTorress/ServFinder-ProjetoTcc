@@ -9,6 +9,11 @@ class ServicesController < ApplicationController
 
     @prestadores = UserService.where(service: params[:id])
     @prestador_escolhido = User.find(@user_service.service.user_selected_id) if @user_service.service.user_selected_id
+
+    @user_location = UserPlace.find_by(user: @service.user)
+    return unless @user_location
+
+    @place = Place.find(@user_location.place.id)
   end
 
   def index

@@ -134,13 +134,23 @@
       </div>
     </div>
   </div>
-  <div>
+  <% if @user_location %>
+    <div>
+      <h4>Localização aproxiamda do usuário:</h4>
+      <p>A localização do Contratante so será revelada para o usuário selecionado para realizar o serviço</p>
+      <div id="map" class='mb-5 location-map'></div>
+      <input type="hidden" id="latitude_longitude" value=<%= "#{@place.latitude},#{@place.longitude}"%>>
+    </div>
+
+  <% else %>
     <h4>Localização aproxiamda do usuário:</h4>
-    <p>A localização do Contratante so será revelada para o usuário selecionado para realizar o serviço</p>
-    <div id="map" class='mb-5 location-map'></div>
-  </div>
+    <p>Esse usuário não compartilha dados de localização</p>
+  <% end %>
 </div>
 
 <script>
-  chamarMapaLocAproximada(<%= @service.user.to_json.html_safe %>)
+  $(document).ready(()=>{
+    const elemento = document.getElementById('latitude_longitude').value;
+    chamarMapaLocAproximada(elemento)
+  });
 </script>

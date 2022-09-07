@@ -18,18 +18,19 @@
 //= require popper
 //= require bootstrap-sprockets
 
-function chamarMapaLocAproximada(){
-    var map = L.map('map').setView([51.505, -0.09], 15);
+function chamarMapaLocAproximada(loc){
+    user_loc = loc.split(',')
+    var map = L.map('map').setView([parseFloat(user_loc[0]), parseFloat(user_loc[1])], 15);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
   
-    L.circle([51.505, -0.09], {
+    L.circle([parseFloat(user_loc[0]), parseFloat(user_loc[1])], {
       color: 'red',
       fillColor: '#f03',
       fillOpacity: 0.5,
-      radius: 500
+      radius: 800
     }).addTo(map)
 }
 
