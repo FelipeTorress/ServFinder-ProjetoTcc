@@ -256,3 +256,7 @@ pt-BR:
   will_paginate:
     next_label: "Próximo"
     previous_label: "Anterior"
+
+  errors:
+    messages:
+      not_saved: "Não foi possivel criar a conta:"

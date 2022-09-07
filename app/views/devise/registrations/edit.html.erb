@@ -1,71 +1,71 @@
-<h1><%= t('.title', resource: resource_name.to_s.humanize) %></h1>
+<div class="welcome-background">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= bootstrap_devise_error_messages! %>
+  <h1 style="margin-top: 90px;"><%= t('.title', resource: resource_name.to_s.humanize) %></h1>
 
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+  <div class="text-center form-devise container shadow rounded border border-primary shape-color mb-5">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= bootstrap_devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :senha %>
+        <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+
+        <small class="form-text text-muted"><%= t('.leave_blank_if_you_don_t_want_to_change_it') %></small>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :confirmar_senha %>
+        <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :nome_de_exibição %><br />
+        <%= f.text_field :name, autocomplete: "Digite Seu nome", class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :telene %>
+        <em class="form-text text-muted">((DDD)Número))</em><br />
+        <%= f.telephone_field :phone_number, autocomplete: "Digite telefone", pattern: '\([0-9]{2}\)[0-9]{4,6}-?[0-9]{3,4}$', class: 'form-control'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :endereço %><br />
+        <%= f.text_field :address, autocomplete: "Digite seu endereço", class: 'form-control' %>
+      </div>
+
+      <p>Não concorda mais com nossas diretrizes?</p>
+
+      <p>Deseja não compartilhar algum dos seus dados de contato?</p>
+      <div>
+        <%= f.check_box :permit_phone_number %>
+        <%= f.label :compartilhar_telefone %>
+      </div>
+        
+      <div>
+        <%= f.check_box :permit_email %>
+        <%= f.label :compartilhar_email %>
+      </div>
+      <hr>
+      <div class="form-group">
+        <%= f.label :senha_atual %>
+        <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control' %>
+
+        <small class="form-text text-muted"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit t('.update'), class: 'btn btn-primary' %>
+      </div>
+      <%= link_to 'Cancelar Mudanças', :back, class: "btn btn-outline-primary shadow text-decoration-none mb-3" %>
+    <% end %>
+    <P><%= t('.unhappy') %>? Se não concondar com nossas Politicas vôce pode:</p>
+    <p><%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
+
   </div>
-
-  <div class="form-group">
-    <%= f.label :senha %>
-    <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
-
-    <small class="form-text text-muted"><%= t('.leave_blank_if_you_don_t_want_to_change_it') %></small>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :confirmar_senha %>
-    <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :nome_de_exibição %><br />
-    <%= f.text_field :name, autocomplete: "Digite Seu nome", class: 'form-control' %>
-  </div>
-
-    <div class="form-group">
-      <%= f.label :telene %>
-      <em class="form-text text-muted">((DDD)Número))</em><br />
-      <%= f.telephone_field :phone_number, autocomplete: "Digite telefone", pattern: '\([0-9]{2}\)[0-9]{4,6}-?[0-9]{3,4}$', class: 'form-control'%>
-    </div>
-
-  <p>Não concorda mais com nossas diretrizes?</p>
-  <P>Você pode remover o consentimento com nossa politicas:</p>
-  <div>
-    <%= f.check_box :accepted_terms_of_use %>
-    <%= link_to 'Termos de Uso', terms_index_path, target: "_blank", data: {confirm: "Ao remover o Consentimento dos termos de uso você não poderá acessar alguma funcionalidades do site! tem certeza que deseja fazer isso?"} %>
-  </div>
-    
-  <div>
-    <%= f.check_box :accepted_privacy_policy %>
-    <%= link_to 'Política de Privacidade', policy_index_path, target: "_blank", data: {confirm: "Ao remover o Consentimento da política de privacidade, você não poderá acessar alguma funcionalidades do site! tem certeza que deseja fazer isso?"}  %>
-  </div>
-
-  <p>Deseja não compartilhar algum dos seus dados de contato?</p>
-  <div>
-    <%= f.check_box :permit_phone_number %>
-    <%= f.label :compartilhar_telefone %>
-  </div>
-    
-  <div>
-    <%= f.check_box :permit_email %>
-    <%= f.label :compartilhar_email %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :senha_atual %>
-    <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control' %>
-
-    <small class="form-text text-muted"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit t('.update'), class: 'btn btn-primary' %>
-  </div>
-<% end %>
-
-<p><%= t('.unhappy') %>? <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %>.</p>
-
-<%= link_to t('.back'), :back %>
+</div>

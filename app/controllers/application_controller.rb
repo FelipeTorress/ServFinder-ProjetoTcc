@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :permit_phone_number, :permit_email, :accepted_terms_of_use, :accepted_privacy_policy])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number, :permit_phone_number,:permit_email, :accepted_terms_of_use, :accepted_privacy_policy])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :permit_phone_number, :permit_email, :accepted_terms_of_use, :accepted_privacy_policy, :address, :isContratante])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number, :permit_phone_number,:permit_email, :accepted_terms_of_use, :accepted_privacy_policy, :address, :isContratante])
   end
 end
