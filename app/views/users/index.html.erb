@@ -1,11 +1,15 @@
 <% if @user_geocode %>
-    <div class="card">
+    <div 
+        class="shadow rounded-3" 
+        style="background-color: white; width:400px;overflow:hidden;margin:auto;"
+    >
         <p class="mt-2">Clique para atualizar sua localização</p>
-        <%= form_with(model: @user_geocode, class: "p-3 mb-3 rounded", local: true, id: 'get-location-form') do |f| %>
+        <%= form_with(model: @user_geocode, class: "pt-3 rounded", local: true, id: 'get-location-form') do |f| %>
             <%= f.hidden_field :id, value: current_user.id %>
             <%= f.hidden_field :lat_lon, value: "", id: 'lat_lon' %>
             <%= f.submit('Atualizar Localização', class: "btn btn-primary link_form", method: :edit) %>
         <% end %>
+        <%= button_to 'Remover Minha Localização', user_place_path(@user_geocode), class: "btn btn-danger my-4 link_form", method: :delete, data: { confirm: "Se você parar de compartilhar sua localização você não poderá mais usar a funcionalidade de pessoa proximas, tem certeza que deseja continuar?" } %>
     </div>
     <div class="user-div" >
         <% if @users && @users.length > 0 %>
