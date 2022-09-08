@@ -1,0 +1,22 @@
+<h2 class="">
+  <%= fa_icon 'comments'%>
+  Conversando com Pessoa
+</h2>
+
+<div class="shadow" style="border-radius:25px;">
+    <div class="card chatbox border-secondary" style="border-radius:25px;">
+        <div class="my-3 mx-3">
+            <div class="float-sm-start" id="message-container">
+                <%= render @messages %>
+            </div>
+        </div>
+    </div> 
+    <div class="d-flex mt-1 container ">
+        <%= form_for(Message.new, html: {class: "ui reply form", role: "form"},  url: users_path, remote: true ) do |f| %>
+            <div>
+                <%= f.text_field :body , class: 'form-control border-primary'%>
+                <%= f.button "Enviar", class: 'btn btn-primary'%>
+            </div>
+        <% end %>
+    </div>
+</div>

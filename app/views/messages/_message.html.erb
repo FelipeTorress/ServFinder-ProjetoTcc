@@ -1,0 +1,11 @@
+<div class="event">
+    <div class="content">
+    <div class="summary">
+        <% if message.user == current_user %>
+            <Strong style="color:green"><%= message.user.name.split(' ').first %></Strong>: <%= message.body %>
+        <% else %>
+            <Strong style="color:red"><%= message.user.name.split(' ').first %></Strong>: <%= message.body %>
+        <% end %>
+    </div>
+    </div>
+</div>

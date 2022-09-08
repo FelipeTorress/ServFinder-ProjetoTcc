@@ -250,3 +250,13 @@ h1, h2, h3, h4, h5, h6, strong {
     z-index:1;
     margin:auto;
 }
+
+.chatbox {
+    height: 425px;
+}
+
+#messages-box {
+    height: 15em;
+    overflow: auto;
+    justify-content: start;
+}

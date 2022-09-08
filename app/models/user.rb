@@ -2,6 +2,7 @@ class User < ApplicationRecord
   before_save :email_downcase
 
   has_many :services
+  has_many :messages
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

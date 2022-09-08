@@ -44,7 +44,7 @@
                                 <% end %>
                                 <% unless prestador.permit_phone_number || prestador.permit_email %>
                                     <p>Esse usuário não compartilha seus dados de contato, utilize nosso chat:</p>
-                                    <button>Acesar Chat</button>
+                                    <%= link_to 'Acessar Chat', chatroom_index_path, class: "btn btn-primary" %>
                                 <% end %>
                             <% else %>
                                 <h6>Meios de Contato do Contratante:</h6>
@@ -58,7 +58,7 @@
                                 <% end %>
                                 <% unless service.user.permit_phone_number || service.user.permit_email %>
                                     <p>Esse usuário não compartilha seus dados de contato, utilize nosso chat:</p>
-                                    <button>Acesar Chat</button>
+                                    <%= link_to 'Acessar Chat', chatroom_index_path, class: "btn btn-primary" %>
                                 <% end %>
                             <% end %>
                         </div>

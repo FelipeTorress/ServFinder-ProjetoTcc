@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'policy/index'
   get 'terms/index'
   get 'home', to: 'homepage#index'
+  get 'chatroom/index'
   devise_for :users
   resources :services
   resources :users, only: [:show, :index,:update]
