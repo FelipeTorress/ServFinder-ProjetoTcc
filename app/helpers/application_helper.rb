@@ -11,4 +11,8 @@ module ApplicationHelper
   def get_prestadores_on_goin(service)
     User.find(service.user_selected_id)
   end
+
+  def permit_comunication(user)
+    user.permit_phone_number || user.permit_email
+  end
 end

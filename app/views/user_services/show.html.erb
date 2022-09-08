@@ -42,8 +42,12 @@
                                     <%= (fa_icon 'phone') %>
                                     <%= prestador.email %>
                                 <% end %>
-                                <% unless prestador.permit_phone_number || prestador.permit_email %>
-                                    <p>Esse usuário não compartilha seus dados de contato, utilize nosso chat:</p>
+                                <% unless permit_comunication(prestador) && permit_comunication(current_user) %>
+                                    <% if permit_comunication(prestador) %>
+                                        <p>Como você não compartilha seus dados de contato, utilize nosso chat:</p>
+                                    <% else %>
+                                        <p>O usuário não compartilha seus dados de contato, utilize nosso chat:</p>
+                                    <% end %>
                                     <%= link_to 'Acessar Chat', chatroom_index_path, class: "btn btn-primary" %>
                                 <% end %>
                             <% else %>
@@ -56,8 +60,12 @@
                                     <%= (fa_icon 'phone') %>
                                     <%= service.user.email %>
                                 <% end %>
-                                <% unless service.user.permit_phone_number || service.user.permit_email %>
-                                    <p>Esse usuário não compartilha seus dados de contato, utilize nosso chat:</p>
+                                <% unless permit_comunication(service.user) && permit_comunication(current_user) %>
+                                    <% if permit_comunication(service.user) %>
+                                        <p>Como você não compartilha seus dados de contato, utilize nosso chat:</p>
+                                    <% else %>
+                                        <p>O usuário não compartilha seus dados de contato, utilize nosso chat:</p>
+                                    <% end %>
                                     <%= link_to 'Acessar Chat', chatroom_index_path, class: "btn btn-primary" %>
                                 <% end %>
                             <% end %>

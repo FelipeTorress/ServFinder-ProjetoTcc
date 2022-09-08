@@ -43,3 +43,29 @@ function chamarMapaLocExata(){
   
     L.marker([51.5, -0.09]).addTo(map);
 }
+
+
+scroll_botton = function() {
+    if ($('#messages-box').length > 0){
+      $('#messages-box').scrollTop($('#messages-box')[0].scrollHeight);
+    }
+  }
+  
+  
+$('#new_message').on('ajax:send', function() {
+    $('#message_body').val("").focus();
+});
+
+$(document).on('turbolinks:load', function() {
+    $('.ui.dropdown').dropdown();
+
+    $('.message .close').on('click', function() {
+        $(this).closest('.message').transition('fade');
+    });
+
+    scroll_botton()
+
+    $(document).bind("ajax:beforeSend", function(){
+        $('#message_body').val('');
+    });
+})

@@ -31,7 +31,7 @@
               <li class="dropdown-item" style="pointer-events: none;">Em Andamento: 0</li>
             <% else %>
               <li><a class="dropdown-item" href=<%="#{user_service_path(ongoing)}"%>>
-                Em Andamento: <%= ongoing.size %>
+                Em Andamento: <span class="badge bg-secondary"><%= ongoing.size %></span>
               </a></li>
             <% end %>
 
