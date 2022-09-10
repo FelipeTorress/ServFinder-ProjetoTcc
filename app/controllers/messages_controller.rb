@@ -9,8 +9,9 @@ class MessagesController < ApplicationController
   end
 
   private
+
   def message_params
-    params.require(:message).permit(:body)
+    params.require(:message).permit(:body, :chat_id)
   end
 
   def message_render(message)

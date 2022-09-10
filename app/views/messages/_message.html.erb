@@ -1,7 +1,7 @@
 <div class="event">
     <div class="content">
         <div class="summary"style="float:left;">
-            <Strong style=<%= message.user == current_user ? "color:green;" : "color:red;" %>><%= message.user.name.split(' ').first %></Strong>: <%= message.body %>
+            <Strong style=<%= message.user_id == current_user.id ? "color:green;" : "color:red;" %>><%= message.user.name.split(' ').first %></Strong>: <%= message.body %>
         </div><br>
     </div>
 </div>

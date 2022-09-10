@@ -9,13 +9,14 @@
     >
         <div class="card chatbox border-secondary" style="border-radius:15px 15px 0px 0px;overflow:hidden">
             <div class="ms-3" id="messages-box">
-                <div class="float-sm-start" id="message-container">
+                <div class="" id="message-container">
                     <%= render @messages %>
                 </div>
             </div>
         </div> 
         <%= form_for(@message, html: {class: "d-flex", role: "form"},  url: message_path, remote: true ) do |f| %>
-            <%= f.text_field :body , class: 'form-control border-primary', style: "border-radius:0px 0px 0px 15px;overflow:hidden"%>
+            <%= f.text_field :body , class: 'form-control border-primary', style: "border-radius:0px 0px 0px 15px;overflow:hidden", autocomplete: "off"%>
+            <%= f.hidden_field :chat_id, value: @chat_id %>
             <%= f.button "Enviar", class: 'btn btn-primary', style: "border-radius:0px 0px 15px 0px;overflow:hidden" %>
         <% end %>
     </div>
