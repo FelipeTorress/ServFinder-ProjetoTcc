@@ -32,6 +32,28 @@ class UserServicesController < ApplicationController
     @services = Service.where(id: params[:id].split('/'))
   end
 
+  def destroy
+    service_finish = user_service_delete
+    service = Service.find(service_finish[:service_id])
+    service.finished = true
+    service.save
+
+    messages = Message.where(chat_id: service_finish[:chat])
+    messages.destroy_all
+
+    user = User.find(service.user_selected_id)
+    user.services_realized += 1
+
+    if user.score.nil?
+      user.score = service_finish[:comment].to_i
+    else
+      user.score += service_finish[:comment].to_i
+    end
+
+    flash[:notice] = 'Serviço Finalizado'
+    redirect_to user_service_path(Service.where(user_id: current_user.id).reject { |ongoing| ongoing.user_selected_id.nil? || ongoing.finished })
+  end
+
   private
 
   def user_service_comment
@@ -44,5 +66,9 @@ class UserServicesController < ApplicationController
 
   def user_service_prestador
     params.require(:user_service).permit(:prestador)[:prestador]
+  end
+
+  def user_service_delete
+    params.require(:user_service).permit(:comment, :chat, :service_id)
   end
 end

@@ -16,7 +16,7 @@
             <% if @user.score.nil? %>
                 Sem Avaliações
             <% else %>
-                <%= @user.score %>
+                <%= @user.services_realized.zero? ? @user.score : @user.score/@user.services_realized %>
             <% end %>
         </p>
     </div>    

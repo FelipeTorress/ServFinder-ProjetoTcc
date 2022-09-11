@@ -1,9 +1,48 @@
 <h5>Mostrar Serviços</h5>
 <% @services.each do |service|%>
+    <% prestador = get_prestadores_on_goin(service) %>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="height:300px">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Encerrando Serviço</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Por favor, dê uma nota para o usuário que realizou o serviço:</p>
+                    <%= form_for(UserService.new, url: user_service_path, remote: true,method: :delete ) do |f| %>
+                    <div>
+                        <%= f.radio_button :comment, '1' %> 
+                        <%= f.label :comment, '1', :value => 1 %>
+                        <%= f.radio_button :comment, '2' %>
+                        <%= f.label :comment, '2', :value => 2 %>
+                        <%= f.radio_button :comment, '3' %>
+                        <%= f.label :comment, '3', :value => 3 %>
+                        <%= f.radio_button :comment, '4' %>
+                        <%= f.label :comment, '4', :value => 4 %>
+                        <%= f.radio_button :comment, '5', :checked => true%>
+                        <%= f.label :comment, '5', :value => 5%>
+                    </div>
+                    <%= f.hidden_field :chat, value: current_user.id.to_s + prestador.id.to_s %>
+                    <%= f.hidden_field :service_id, value: service.id %>
+                    <%= f.submit 'Encerrar Serviço',
+                        class:"btn btn-primary mt-5",
+                        data: { confirm: "Tem certeza que deseja finalizar o serviço? depois de Finalizado não há como abrir novamente!" } 
+                    %>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="page-content">
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-8 mt-4">
+                    <% if current_user.isContratante %>
+                        <button type="button" class="border border-secondary btn-danger close-user-service" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <%=(fa_icon 'close')+'Encerrar Serviço'%>
+                        </button>
+                    <% end %>
                     <div class="card text-center shadow mb-5 bg-white rounded border border-secondary">
                         
                         <div class="card-header font-italic">
@@ -32,7 +71,6 @@
                             </div>
 
                             <% if current_user.isContratante %>
-                                <% prestador = get_prestadores_on_goin(service) %>
                                 <h6>Meios de Contato do Prestador:</h6>
                                 <% if prestador.permit_phone_number%>
                                     <%= (fa_icon 'envelope') %>
