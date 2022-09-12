@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
         #mudar a quant de servicos
-    @services = @user.services.paginate(page: params[:page], per_page: 2)
+    @services = if @user.isContratante
+                  @user.services.paginate(page: params[:page], per_page: 2)
+                else
+                  Service.where(user_selected_id: @user.id).paginate(page: params[:page], per_page: 2)
+                end
   end
 
   def index

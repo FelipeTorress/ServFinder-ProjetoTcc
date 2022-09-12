@@ -3,7 +3,7 @@ module ApplicationHelper
     services = if current_user.isContratante
                  Service.where(user_id: current_user.id).reject { |service| service.user_selected_id.nil? || service.finished }
                else
-                 Service.where(user_selected_id: current_user.id)
+                 Service.where(user_selected_id: current_user.id).reject { |service| service.user_selected_id.nil? || service.finished }
                end
     services.map(&:id)
   end

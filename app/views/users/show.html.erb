@@ -21,7 +21,13 @@
         </p>
     </div>    
 
-    <h3 class="my-5"><%= @user == current_user ? "Seus Serviços:" : "Serviços do Usuário:"%></h3>
+    <h3 class="my-5">
+    <% if @user.isContratante %>
+        <%= @user == current_user ? "Seus Serviços:" : "Serviços do Usuário:"%>
+    <% else %>
+        <%= @user == current_user ? "Seus Serviços Realizados:" : "Serviços Realizados Pelo Usuário:"%>
+    <% end %>
+    </h3>
     <% if @services.length > 0 %>
         <div class="container" id="cards-width">
             <% @services.each do |service| %>
@@ -69,8 +75,8 @@
             <% end %>
         </div>
     <% else %>
-        <h4><%= @user == current_user ? "Você não possui Serviços cadastrados" : "Esse usuário não possui serviços cadastrados"%></h4>
-        <% if user_signed_in? && ( @user == current_user ) %>
+        <h4><%= @user == current_user ? "Você não possui Serviços #{current_user.isContratante ? 'cadastrados' : 'realizados'}" : "Esse usuário não possui serviços #{current_user.isContratante ? 'cadastrados' : 'realizados'}"%></h4>
+        <% if user_signed_in? && ( @user == current_user ) && current_user.isContratante %>
             <%= button_to "Criar novo serviço", new_service_path, class: "btn btn-primary"  %>
         <% end %>
     <% end %>

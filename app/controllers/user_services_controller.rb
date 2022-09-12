@@ -49,9 +49,10 @@ class UserServicesController < ApplicationController
     else
       user.score += service_finish[:comment].to_i
     end
+    user.save
 
     flash[:notice] = 'Serviço Finalizado'
-    redirect_to user_service_path(Service.where(user_id: current_user.id).reject { |ongoing| ongoing.user_selected_id.nil? || ongoing.finished })
+    redirect_to user_path(service.user)
   end
 
   private
