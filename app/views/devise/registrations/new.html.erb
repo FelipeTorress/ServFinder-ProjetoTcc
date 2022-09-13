@@ -64,6 +64,12 @@
         <%= link_to 'Política de Privacidade', policy_index_path, target: "_blank" %>
       </div>
 
+      <% if @show_checkbox_recaptcha %>
+        <%= recaptcha_tags %>
+      <% else %>
+        <%= recaptcha_v3(action: 'login', site_key: Rails.application.credentials.recap_pub_key) %>
+      <% end %>
+
       <div class="form-group" id="sign-up-btn">
         <p class="text-muted fs-6">Ao clicar em "Criar Conta" voce confirma que é maior de 18 anos.</p>
         <%= f.submit t('.sign_up'), class: 'btn btn-primary' %>
