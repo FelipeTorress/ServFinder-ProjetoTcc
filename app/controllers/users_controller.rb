@@ -5,9 +5,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
         #mudar a quant de servicos
     @services = if @user.isContratante
-                  @user.services.paginate(page: params[:page], per_page: 2)
+                  @services_len = @user.services
+                  @services_len.paginate(page: params[:page], per_page: 4)
                 else
-                  Service.where(user_selected_id: @user.id).paginate(page: params[:page], per_page: 2)
+                  @services_len = Service.where(user_selected_id: @user.id)
+                  @services_len.paginate(page: params[:page], per_page: 4)
                 end
   end
 

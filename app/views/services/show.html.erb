@@ -56,7 +56,9 @@
                   <%else%>
                     <%= prestador.user.services_realized.zero? ? prestador.user.score : prestador.user.score/prestador.user.services_realized %>
                   <% end %>
-                  <h6>Comentário do Usuário:</h6>
+                  <h6 class="card-title">Serviços Realizados: </h6>
+                  <p><%= prestador.user.services_realized %></p>
+                  <h6 class="card-title">Comentário do Usuário:</h6>
                   <p class="card-text"><%= prestador.comment %></p>
                   <%= form_with(model: prestador, class: "p-3 mb-3 rounded", local: true) do |f| %>
                     <%= f.hidden_field :service, value: @user_service.service.id %>
