@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_11_222849) do
+ActiveRecord::Schema.define(version: 2022_09_14_011752) do
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(version: 2022_09_11_222849) do
     t.index ["title"], name: "index_services_on_title"
     t.index ["user_id"], name: "index_services_on_user_id"
     t.index ["user_selected_id"], name: "index_services_on_user_selected_id"
+  end
+
+  create_table "user_logs", force: :cascade do |t|
+    t.string "action"
+    t.datetime "date_of_occurrence"
+    t.string "user_of_action"
+    t.string "info"
   end
 
   create_table "user_places", force: :cascade do |t|

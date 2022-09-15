@@ -27,11 +27,21 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(users)
+    save_login
     services_path
   end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :permit_phone_number, :permit_email, :accepted_terms_of_use, :accepted_privacy_policy, :address, :isContratante])
     devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number, :permit_phone_number,:permit_email, :accepted_terms_of_use, :accepted_privacy_policy, :address, :isContratante])
+  end
+
+  def save_login
+    log = UserLog.new
+    log.action = 'Login'
+    # Time.use_zone('Brasilia') { DateTime.now.change(offset: Time.zone.now.strftime('%z')) }
+    log.date_of_occurrence = DateTime.now
+    log.user_of_action = current_user.id
+    log.save
   end
 end

@@ -30,6 +30,18 @@ class UserServicesController < ApplicationController
 
   def show
     @services = Service.where(id: params[:id].split('/'))
+    @services.each do |service|
+      log_exists = UserLog.where(info: "SeenUser: #{service.user_selected_id}")
+
+      next unless log_exists.empty?
+
+      log = UserLog.new
+      log.action = 'SeeUser'
+      log.date_of_occurrence = DateTime.now
+      log.user_of_action = current_user.id
+      log.info = "SeenUser: #{service.user_selected_id}"
+      log.save
+    end
   end
 
   def destroy

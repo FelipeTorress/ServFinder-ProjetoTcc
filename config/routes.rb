@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'home', to: 'homepage#index'
   get 'chatroom/index'
   post 'message', to: 'messages#create' 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
   resources :services
   resources :users, only: [:show, :index,:update]
 
