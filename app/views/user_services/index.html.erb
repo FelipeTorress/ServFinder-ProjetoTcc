@@ -1,0 +1,43 @@
+<div class="card-service rounded">
+  <% unless @service.nil? %>
+    <% @service.each do |service| %>
+      <div class="card border-secondary mb-3 mt-3 rounded-3" style="width: 18rem;height:360px;">
+        <small class="rounded rounded-pill shadow value-card">
+          <%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+        </small>
+        
+        <img 
+          src="https://th.bing.com/th/id/R.92529682cae34e5de0bbe28cad2d5f82?rik=usfgAOWA%2b8YDpw&riu=http%3a%2f%2fmetropolitanafm.uol.com.br%2fwp-content%2fuploads%2f2016%2f02%2f240855-1000-14460854403.png.jpeg&ehk=hrdXntDXyxtifLhm%2bP351XqG5XzMxVcFRdtsCW5iLDo%3d&risl=&pid=ImgRaw&r=0" 
+          class="card-img-top" 
+          style="margin-top:-36px;height:150px;"
+        >
+        
+        <img 
+          src=<%= asset_path('user_img.jpg') %> 
+          class="profile-photo rounded rounded-circle shadow" 
+          style="max-width:100px; margin-top:-105px; margin-bottom:5px;"
+        >
+
+        <div class="card-body d-flex flex-column align-items-center shape-color">
+          <h6 class="card-title"><%= service.title %></h6>
+          <p class="card-text"><%= truncate(service.description, length: 70) %></p>
+          <div class="card-buttons mt-auto">
+            <% if user_signed_in? && ( service.user == current_user) && service.user_selected_id.nil? %>
+              <a href=<%= "#{edit_service_path(service)}"%> class="btn btn-warning rounded rounded-pill"><%= fa_icon 'wrench' %></a>
+              <a href=<%= "#{service_path(service)}"%> class="btn btn-primary rounded rounded-pill">Mais Detalhes</a>
+              <%= link_to (fa_icon 'trash'), service_path(service), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger rounded rounded-pill" %>
+            <% else %>
+              <a href=<%= "#{service_path(service)}"%> class="btn btn-primary rounded rounded-pill">Mais Detalhes</a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <h1>Nos desculpe, não encontramos nada com seu parametro de busca, tente pesquisar por outra coisa</h1>
+  <% end %>
+</div>
+<div class="flickr_pagination d-flex justify-content-center">
+  <div class="text-center">
+  </div>
+</div>

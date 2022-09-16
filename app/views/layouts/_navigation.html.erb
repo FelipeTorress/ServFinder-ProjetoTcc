@@ -11,8 +11,8 @@
     <div class="shadow p-1 bg-body rounded rounded-pill border border-primary" id="search-navbar">
       <form class="d-flex">
         <a href=<%= "#{users_path}"%>><button class="btn btn-primary rounded-pill text-center"><%= fa_icon 'globe' %></button></a>
-        <input class="form-control mx-2 rounded-pill" type="search" placeholder="O Que Você Busca" aria-label="Search">
-        <button class="btn btn-outline-primary rounded-pill text-center" type="submit"><%= fa_icon 'search' %></button>
+        <input class="form-control mx-2 rounded-pill" type="search" placeholder="O Que Você Busca" aria-label="Search" id='text-search'>
+        <a href="" id="go-page"><button class="btn btn-outline-primary rounded-pill text-center" type="submit"><%= fa_icon 'search' %></button></a>
       </form>
     </div>
     <div class="dropdown dropstart shadow bg-body rounded rounded-pill border border-primary" id="user-pill">
@@ -48,3 +48,11 @@
     </div>
   </div>
 </nav>
+
+<script>
+  $('#text-search').keyup(function(){
+    var text = $(this).val();
+    const a = document.querySelector("#go-page");
+    a.href = `/user_services?search=${text}`
+  });
+</script>

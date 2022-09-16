@@ -1,5 +1,14 @@
 class UserServicesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
+
+  def index
+    return unless params[:search]
+
+    service = Service.where('title like ?', "%#{params[:search].strip}%")
+    @service = service.paginate(page: params[:page], per_page: 4)
+    flash[:notice] = 'Resultados para sua busca'
+  end
+
   def create
     service = Service.find(user_service_service)
     if UserService.find_by(user: current_user, service: service)
