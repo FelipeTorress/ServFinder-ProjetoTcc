@@ -11,15 +11,17 @@
         <% end %>    
     <% end %>
     </div>
-        <h5 class="mt-2">Nota do Usuário:</h5>
-        <p class="card-text">
-            <% if @user.score.nil? %>
-                Sem Avaliações
-            <% else %>
-                <%= @user.services_realized.zero? ? @user.score : @user.score/@user.services_realized %>
-            <% end %>
-        </p>
-        <h5>Total de Serviços <%= (@user.isContratante ? 'Criados: ' : 'Prestados: ')+ @services_len.size.to_s %> </h5>
+        <% unless @user.isContratante %>
+            <h5 class="mt-2">Nota do Usuário:</h5>
+            <p class="card-text">
+                <% if @user.score.nil? %>
+                    Sem Avaliações
+                <% else %>
+                    <%= @user.services_realized.zero? ? @user.score : @user.score/@user.services_realized %>
+                <% end %>
+            </p>
+        <% end %>
+        <h5 class="mt-2">Total de Serviços <%= (@user.isContratante ? 'Criados: ' : 'Prestados: ')+ @services_len.size.to_s %> </h5>
     </div>    
 
     <h3 class="my-5">

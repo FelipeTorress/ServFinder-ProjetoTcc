@@ -25,6 +25,7 @@
                     </div>
                     <%= f.hidden_field :chat, value: current_user.id.to_s + prestador.id.to_s %>
                     <%= f.hidden_field :service_id, value: service.id %>
+                    <%= f.hidden_field :prestador_confirm, value: false %>
                     <%= f.submit 'Encerrar Serviço',
                         class:"btn btn-primary mt-5",
                         data: { confirm: "Tem certeza que deseja finalizar o serviço? depois de Finalizado não há como abrir novamente!" } 
@@ -42,6 +43,16 @@
                         <button type="button" class="border border-secondary btn-danger close-user-service" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <%=(fa_icon 'close')+'Encerrar Serviço'%>
                         </button>
+
+                    <% elsif !current_user.isContratante && !service.finished_prestador %>
+                        <%= form_for(UserService.new, url: user_service_path, remote: true,method: :delete ) do |f| %>
+                            <%= f.hidden_field :prestador_confirm, value: true %>
+                            <%= f.hidden_field :service_id, value: service.id %>
+                            <%= f.submit 'Confirmar Realização do Serviço',
+                                class:"btn btn-primary mt-5",
+                                data: { confirm: "Tem certeza que deseja confirmar a realização do serviço? Essa ação não pode ser desfeita" } 
+                            %>
+                        <% end %>
                     <% end %>
                     <div class="card text-center shadow mb-5 bg-white rounded border border-secondary">
                         
@@ -76,11 +87,11 @@
                                     <p>Passe o Mouse Abaixo Para Ver</p>
                                     <div class="descricao">
                                         <% if prestador.permit_phone_number%>
-                                            <%= (fa_icon 'envelope') %>
+                                            <%= (fa_icon 'phone') %>
                                             <%= prestador.phone_number %><br>
                                         <% end %>
                                         <% if prestador.permit_email %>
-                                            <%= (fa_icon 'phone') %>
+                                            <%= (fa_icon 'envelope') %>
                                             <%= prestador.email %>
                                         <% end %>
                                     </div>
@@ -100,11 +111,11 @@
                                     <p>Passe o Mouse Abaixo Para Ver</p>
                                     <div class="descricao">
                                         <% if service.user.permit_phone_number%>
-                                            <%= (fa_icon 'envelope') %>
+                                            <%= (fa_icon 'phone') %>
                                             <%= service.user.phone_number %><br>
                                         <% end %>
                                         <% if service.user.permit_email %>
-                                            <%= (fa_icon 'phone') %>
+                                            <%= (fa_icon 'envelope') %>
                                             <%= service.user.email %>
                                         <% end %>
                                     </div>
@@ -120,7 +131,11 @@
                             <% end %>
                         </div>
                         <div class="card-footer text-muted">
-                            <small>Serviço Aceito a <%= time_ago_in_words(service.updated_at) %> atrás</small>
+                            <% if service.finished_prestador %>
+                                <small>Serviço Aguardando Confirmação a <%= time_ago_in_words(service.updated_at) %> atrás</small>
+                            <% else %>
+                                <small>Serviço Atualizado a <%= time_ago_in_words(service.updated_at) %> atrás</small>
+                            <% end %>
                         </div>
                     </div>
                 </div>
