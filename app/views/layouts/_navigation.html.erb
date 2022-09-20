@@ -8,9 +8,9 @@
         ServFinder
       </div>
     </a>
-    <div class="shadow p-1 bg-body rounded rounded-pill border border-primary" id="search-navbar">
+    <div class="shadow p-1 bg-body rounded rounded-pill border border-primary d-flex" id="search-navbar">
+      <a href=<%= "#{users_path}"%>><button class="btn btn-primary rounded-pill text-center"><%= fa_icon 'globe' %></button></a>
       <form class="d-flex">
-        <a href=<%= "#{users_path}"%>><button class="btn btn-primary rounded-pill text-center"><%= fa_icon 'globe' %></button></a>
         <input class="form-control mx-2 rounded-pill" type="search" placeholder="O Que Você Busca" aria-label="Search" id='text-search'>
         <a href="" id="go-page"><button class="btn btn-outline-primary rounded-pill text-center" type="submit"><%= fa_icon 'search' %></button></a>
       </form>

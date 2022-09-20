@@ -1,2 +1,11 @@
-<p class="alert-success"><%= notice %></p>
-<p class="alert-danger"><%= alert %></p>
+<% unless notice.nil? %>
+    <p class="alert-success base-alert" style="z-index:10;" id="message"><%= notice %></p>
+<% end %>
+<% unless alert.nil? %>
+    <p class="alert-danger base-alert" style="z-index:10;" id="message"><%= alert %></p>
+<% end %>
+<script>
+    $("#message").delay(3000).slideUp(500, function(){
+      $("#message").alert('close');
+  });
+</script>

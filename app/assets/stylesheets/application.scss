@@ -19,6 +19,7 @@
 
 //gobal
 body{
+  overflow-x: hidden;
   padding-bottom: 20px;
   padding-top: 30px;
   font-family: 'Poppins', sans-serif;
@@ -67,7 +68,6 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 #search-navbar{
-    width: 30%;
     height: 10%;
 }
 
@@ -282,4 +282,32 @@ h1, h2, h3, h4, h5, h6, strong {
 .item:hover .descricao{
     visibility: visible;
     opacity: 1;
+}
+
+.base-alert {
+    position: relative;
+    padding: 0.75rem 2.3rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    width: 20%;
+    top: 15%;
+    right: 0;
+    transform: translateX(0%);
+    position: absolute;
+    animation: alert-box 5s forwards .5;
+}
+   
+@keyframes alert-box {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    25% {
+        transform: translateX(-10%);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(0%);
+    }
 }
