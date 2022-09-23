@@ -34,7 +34,7 @@ function chamarMapaLocAproximada(loc){
         radius: 800
         }).addTo(map)
     } catch (e){
-        Window.location.reload()
+        location.reload();
     }
 }
 
