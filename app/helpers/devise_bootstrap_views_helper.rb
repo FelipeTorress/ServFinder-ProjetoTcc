@@ -11,6 +11,8 @@ module DeviseBootstrapViewsHelper
         msg = 'Você precisa aceitar os Termos de Uso'
       elsif msg == 'Accepted privacy policy não pode ficar em branco'
         msg = 'Você precisa aceitar a Política de Privacidade'
+      elsif msg.include? 'Current password'
+        msg = 'Para atualizar seus dados digite sua senha no campo indicado!'
       end
       content_tag(:li, msg)
     end.join

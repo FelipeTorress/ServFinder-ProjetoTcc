@@ -1,7 +1,7 @@
 <% if @user_geocode %>
     <div 
         class="shadow rounded-3" 
-        style="background-color: white; width:400px;overflow:hidden;margin:auto;"
+        style="background-color: white; width:400px;overflow:hidden;margin:20px auto -30px;"
     >
         <p class="mt-2">Clique para atualizar sua localização</p>
         <%= form_with(model: @user_geocode, class: "pt-3 rounded", local: true, id: 'get-location-form') do |f| %>

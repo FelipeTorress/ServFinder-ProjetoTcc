@@ -2,9 +2,12 @@
 
   <h1 style="margin-top: 90px;"><%= t('.title', resource: resource_name.to_s.humanize) %></h1>
 
+  <div style="width:33%;margin:auto;">
+    <%= bootstrap_devise_error_messages! %>
+  </div>
+
   <div class="text-center form-devise container shadow rounded border border-primary shape-color mb-5">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= bootstrap_devise_error_messages! %>
 
       <div class="form-group">
         <%= f.label :email %>
@@ -62,7 +65,7 @@
       <div class="form-group">
         <%= f.submit t('.update'), class: 'btn btn-primary' %>
       </div>
-      <%= link_to 'Cancelar Mudanças', :back, class: "btn btn-outline-primary shadow text-decoration-none mb-3" %>
+      <%= link_to 'Cancelar Mudanças', root_path, class: "btn btn-outline-primary shadow text-decoration-none mb-3" %>
     <% end %>
     <P><%= t('.unhappy') %>? Se não concondar com nossas Politicas vôce pode:</p>
     <p><%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
