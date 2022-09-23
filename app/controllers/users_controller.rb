@@ -5,10 +5,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
         #mudar a quant de servicos
     @services = if @user.isContratante
-                  @services_len = @user.services
+                  @services_len = @user.services.order('created_at DESC')
                   @services_len.paginate(page: params[:page], per_page: 4)
                 else
-                  @services_len = Service.where(user_selected_id: @user.id)
+                  @services_len = Service.where(user_selected_id: @user.id).order('created_at DESC')
                   @services_len.paginate(page: params[:page], per_page: 4)
                 end
   end

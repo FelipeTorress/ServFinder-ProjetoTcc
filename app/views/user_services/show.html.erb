@@ -40,7 +40,7 @@
             <div class="row justify-content-md-center">
                 <div class="col-8 mt-4">
                     <% if current_user.isContratante %>
-                        <button type="button" class="border border-secondary btn-danger close-user-service" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="border border-secondary btn-danger close-user-service-red" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <%=(fa_icon 'close')+'Encerrar Serviço'%>
                         </button>
 
@@ -48,9 +48,9 @@
                         <%= form_for(UserService.new, url: user_service_path, remote: true,method: :delete ) do |f| %>
                             <%= f.hidden_field :prestador_confirm, value: true %>
                             <%= f.hidden_field :service_id, value: service.id %>
-                            <%= f.submit 'Confirmar Realização do Serviço',
-                                class:"btn btn-primary mt-5",
-                                data: { confirm: "Tem certeza que deseja confirmar a realização do serviço? Essa ação não pode ser desfeita" } 
+                            <%= f.submit 'Confirmar Realização',
+                                class:"border border-secondary btn-success close-user-service-green",
+                                data: { confirm: "Tem certeza que deseja confirmar a realização do serviço? Essa ação não pode ser desfeita" }
                             %>
                         <% end %>
                     <% end %>
@@ -83,8 +83,8 @@
 
                             <% if current_user.isContratante %>
                                 <h6>Meios de Contato do Prestador:</h6>
-                                <div class="item" id=<%= prestador.id.to_s %>>
-                                    <p>Passe o Mouse Abaixo Para Ver</p>
+                                <div class="item" id=<%= prestador.id.to_s %> style="border-radius:25px;">
+                                    <p>Passe o Mouse Aqui Para Ver</p>
                                     <div class="descricao">
                                         <% if prestador.permit_phone_number%>
                                             <%= (fa_icon 'phone') %>
@@ -107,8 +107,8 @@
                                 <% end %>
                             <% else %>
                                 <h6>Meios de Contato do Contratante:</h6>
-                                <div class="item" id=<%= service.user.id.to_s %>>
-                                    <p>Passe o Mouse Abaixo Para Ver</p>
+                                <div class="item shadow border border-secondary" id=<%= service.user.id.to_s %> style="border-radius:25px;">
+                                    <p>Passe o Mouse Aqui Para Ver</p>
                                     <div class="descricao">
                                         <% if service.user.permit_phone_number%>
                                             <%= (fa_icon 'phone') %>
@@ -116,7 +116,11 @@
                                         <% end %>
                                         <% if service.user.permit_email %>
                                             <%= (fa_icon 'envelope') %>
-                                            <%= service.user.email %>
+                                            <%= service.user.email %><br>
+                                        <% end %>
+                                        <% if service.user.address %>
+                                            <%= (fa_icon 'map-marker') %>
+                                            <%= service.user.address %>
                                         <% end %>
                                     </div>
                                 </div>
