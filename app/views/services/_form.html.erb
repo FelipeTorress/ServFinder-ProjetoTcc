@@ -18,31 +18,31 @@
     <% end %>
   </div>
 
-  <div class="container" id="cards-width">
-    <%= form_with(model: @service, class: "shadow p-3 mb-3 bg-info rounded centralizar", local: true) do |f| %>
+  <div class="container bg-light shadow rounded border border-primary" id="cards-width" style='width:40%;'>
+    <%= form_with(model: @service, class: "", local: true ) do |f| %>
         <div class="centralizar">
-            <h5 class="text-light">Qual serviço você precisa?</h5>
+            <h5 class="mt-2">Qual serviço você precisa?<span style="color:red;">*</span></h5>
             <div class="form-group row">
                 <div class="centralizar-form-newservice">
                 <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Resumo do Serviço" %>
                 </div>
             </div>
 
-            <h5 class="text-light">Dê detalhes do serviço que você precisa</h5>
+            <h5>Dê detalhes do serviço que você precisa<span style="color:red;">*</span></h5>
             <div class="form-group row">
                 <div class="centralizar-form-newservice"> 
                 <%= f.text_area :description, rows: 10, class: "form-control shadow rounded", placeholder: "Descrição do Serviço" %>
                 </div>
             </div>
 
-            <h5 class="text-light">Existe data limite para realização do serviço?</h5>
+            <h5>Existe data limite para realização do serviço?</h5>
             <div class="form-group row">
                 <div>
                     <%= f.date_field :limit_date %>
                 </div>
             </div>
 
-            <h5 class="text-light">Quanto você vai pagar pelo serviço?</h5>
+            <h5>Quanto você vai pagar pelo serviço?<span style="color:red;">*</span></h5>
             <div class="form-group row">
                 <div>
                     <%= f.number_field :value %>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="form-group row justify-content-center">
-                <%= f.submit( @service.new_record? ? "Criar Serviço" : "Editar Serviço",class: "btn btn-outline-light btn-lg" ) %>
+                <%= f.submit( @service.new_record? ? "Criar Serviço" : "Editar Serviço",class: "btn btn-primary", style:"width:60%" ) %>
             </div>
         </div>
     <% end %>

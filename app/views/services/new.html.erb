@@ -1,6 +1,7 @@
-<div class="text-center">
-    <h2>Que serviço você deseja?</h2>
-
-    <%= render 'form' %>
-    <%= link_to 'Voltar para a Home', services_path %>
+<div class="text-center service-background">
+    <div style="margin-top: 80px;margin-bottom:80px;">
+        <h2 style="color:white;">Que serviço você deseja?</h2>
+        <%= render 'form' %>
+        <%= button_to 'Voltar para a Home', root_path, method: :get, class: "mt-3 btn btn-primary" %>
+    </div>
 </div>
