@@ -10,18 +10,26 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    success = verify_recaptcha(action: 'login', minimum_score: 0.5, secret_key: Rails.application.credentials.recap_pri_key)
-    checkbox_success = verify_recaptcha unless success
-    if success || checkbox_success
-      super
-    else
-      if !success
-        @show_checkbox_recaptcha = true
-      end
-      render 'new'
-    end
-  end
+  # captcha
+  # def create
+  #   byebug
+  #   success = verify_recaptcha(action: 'login', minimum_score: 0.5, secret_key: Rails.application.credentials.recap_pri_key)
+  #   checkbox_success = verify_recaptcha unless success
+  #   if success || checkbox_success
+  #     super
+  #   else
+  #     if !success
+  #       @show_checkbox_recaptcha = true
+  #     end
+  #     render 'new'
+  #   end
+  # end
+
+  # <% if @show_checkbox_recaptcha %>
+  #   <%= recaptcha_tags %>
+  # <% else %>
+  #   <%= recaptcha_v3(action: 'login', site_key: Rails.application.credentials.recap_pub_key) %>
+  # <% end %>
 
   # GET /resource/edit
   # def edit

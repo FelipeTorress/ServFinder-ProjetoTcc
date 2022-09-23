@@ -1,17 +1,19 @@
 <div class="container">
-  <div class="alert-danger alert-dismissible fade show" role="alert">
+  <div class="alert-danger alert-dismissible fade show container" role="alert" style="width:60%;">
     <% if @service != nil && @service.errors.any? %>
       <h4>Os seguintes erros foram encontrados:</h4>
       <ul>
         <% @service.errors.full_messages.each do |msg| %>
-          <% if msg == "Title can't be blank" %>
+          <% if msg == "Title não pode ficar em branco" %>
               <li>O resumo do serviço não pode ficar em branco</li>
-          <% elsif msg == "Title is too short (minimum is 6 characters)" %>
+          <% elsif msg == "Title é muito curto (mínimo: 6 caracteres)" %>
               <li>O resumo do serviço é muito pequeno (mínimo 6 caracteres)</li>
-          <% elsif msg == "Description can't be blank" %>
+          <% elsif msg == "Description não pode ficar em branco" %>
               <li>A descrição não pode ficar em branco</li>
-          <% elsif msg == "Description is too short (minimum is 10 characters)" %>
+          <% elsif msg == "Description é muito curto (mínimo: 10 caracteres)" %>
               <li>A descrição é muito pequena (mínimo de 10 caracteres)</li>
+          <% elsif msg == 'Value não pode ficar em branco' %>
+              <li>O Valor do serviço não pode ficar vazio</li>
           <%end%>
         <% end %>
       </ul>

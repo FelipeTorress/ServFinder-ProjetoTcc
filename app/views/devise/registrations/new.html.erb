@@ -1,17 +1,19 @@
 <div class="welcome-background">
   <h1 style="margin-top: 90px;"><%= t('.sign_up') %></h1>
 
+  <div style="width:33%;margin:auto;">
+    <%= bootstrap_devise_error_messages! %>
+  </div>
   <div class="text-center form-devise container shadow rounded border border-primary shape-color mb-5">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= bootstrap_devise_error_messages! %>
 
       <div class="form-group">
-        <%= f.label :email %>
+        <%= f.label :email %><span style="color:red;">*</span>
         <%= f.email_field :email, autofocus: true, autocomplete: 'Digite seu email', class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label :nome %><br />
+        <%= f.label :nome %><span style="color:red;">*</span><br />
         <%= f.text_field :name, autocomplete: "Digite seu nome", class: 'form-control' %>
       </div>
 
@@ -22,12 +24,12 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :endereço_completo %><br />
+        <%= f.label :endereço_completo %><span style="color:red;">*</span><br />
         <%= f.text_field :address, autocomplete: "Digite seu endereço", class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label :senha %>
+        <%= f.label :senha %><span style="color:red;">*</span>
         <% if @minimum_password_length %>
           <em class="form-text text-muted">(No mínimo <%= @minimum_password_length%> caracteres)</em>
         <% end %>
@@ -35,12 +37,12 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :confirmar_senha %>
+        <%= f.label :confirmar_senha %><span style="color:red;">*</span>
         <%= f.password_field :password_confirmation, autocomplete: 'Confirmar senha', class: 'form-control' %>
       </div>
 
       <p> 
-      Selecione o tipo de usuário desejado:
+      Selecione o tipo de usuário desejado:<span style="color:red;">*</span>
       <br /><em class="form-text text-muted">Leia os termos de uso para entender melhor</em>
       </p>
       
@@ -63,12 +65,6 @@
         <%= f.check_box :accepted_privacy_policy %>
         <%= link_to 'Política de Privacidade', policy_index_path, target: "_blank" %>
       </div>
-
-      <% if @show_checkbox_recaptcha %>
-        <%= recaptcha_tags %>
-      <% else %>
-        <%= recaptcha_v3(action: 'login', site_key: Rails.application.credentials.recap_pub_key) %>
-      <% end %>
 
       <div class="form-group" id="sign-up-btn">
         <p class="text-muted fs-6">Ao clicar em "Criar Conta" voce confirma que é maior de 18 anos.</p>
