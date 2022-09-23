@@ -83,7 +83,7 @@
 
                             <% if current_user.isContratante %>
                                 <h6>Meios de Contato do Prestador:</h6>
-                                <div class="item" id=<%= prestador.id.to_s %> style="border-radius:25px;">
+                                <div class="item shadow border border-secondary" id=<%= prestador.id.to_s %> style="border-radius:25px;">
                                     <p>Passe o Mouse Aqui Para Ver</p>
                                     <div class="descricao">
                                         <% if prestador.permit_phone_number%>

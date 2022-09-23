@@ -30,6 +30,12 @@ class UserServicesController < ApplicationController
     service = Service.find(user_service_service)
     service.user_selected_id = user_service_prestador
     if service.save
+      log = UserLog.new
+      log.action = 'ServiceProgress'
+      log.date_of_occurrence = DateTime.now
+      log.user_of_action = current_user.id
+      log.info = "Prestador: #{user_service_prestador}"
+      log.save
       flash[:notice] = 'Prestador Selecionado! Entre em contato ou aguarde.'
     else
       flash[:alert] = 'Ocorreu um erro! Tente novamente mais tarde.'
@@ -39,17 +45,33 @@ class UserServicesController < ApplicationController
 
   def show
     @services = Service.where(id: params[:id].split('/'))
-    @services.each do |service|
-      log_exists = UserLog.where(info: "SeenUser: #{service.user_selected_id}")
 
-      next unless log_exists.empty?
+    if current_user.isContratante
+      @services.each do |service|
+        log_exists = UserLog.where(info: "SeenUser: #{service.user_selected_id}")
 
-      log = UserLog.new
-      log.action = 'SeeUser'
-      log.date_of_occurrence = DateTime.now
-      log.user_of_action = current_user.id
-      log.info = "SeenUser: #{service.user_selected_id}"
-      log.save
+        next unless log_exists.empty?
+
+        log = UserLog.new
+        log.action = 'SeeUser'
+        log.date_of_occurrence = DateTime.now
+        log.user_of_action = current_user.id
+        log.info = "SeenUser: #{service.user_selected_id}"
+        log.save
+      end
+    else
+      @services.each do |service|
+        log_exists = UserLog.where(info: "SeenUser: #{service.user.id}")
+
+        next unless log_exists.empty?
+
+        log = UserLog.new
+        log.action = 'SeeUser'
+        log.date_of_occurrence = DateTime.now
+        log.user_of_action = current_user.id
+        log.info = "SeenUser: #{service.user.id}"
+        log.save
+      end
     end
   end
 
