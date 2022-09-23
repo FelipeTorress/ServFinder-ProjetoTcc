@@ -1,5 +1,5 @@
 <div class="user-div" >
-    <h1><%= @user == current_user ? "Seu Perfil" : "Perfil de #{@user.name}"%></h1>
+    <h1 class="mt-3"><%= @user == current_user ? "Seu Perfil" : "Perfil de #{@user.name}"%></h1>
 
     <img src=<%= asset_path('user_img.jpg') %> class="profile-photo rounded-circle shadow" alt="foto">
 
