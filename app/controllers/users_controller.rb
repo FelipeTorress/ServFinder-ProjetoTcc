@@ -25,7 +25,12 @@ class UsersController < ApplicationController
     places_near = Place.near([place.latitude, place.longitude], 10, units: :km).map(&:id)
     places_near.delete(@user_place.id)
     users_near = UserPlace.where(place: places_near).map(&:user_id)
-    @users = User.where(id: users_near, isContratante: !current_user.isContratante).paginate(page: params[:page], per_page: 2)
+
+    if current_user.isContratante
+      @users = User.where(id: users_near, isContratante: !current_user.isContratante).paginate(page: params[:page], per_page: 2)
+    else
+      @services = Service.where(user: users_near, finished: false, user_selected_id:nil ).paginate(page: params[:page], per_page: 4)
+    end
   end
 
   def update

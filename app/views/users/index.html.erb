@@ -12,7 +12,7 @@
         <%= button_to 'Remover Minha Localização', user_place_path(@user_geocode), class: "btn btn-danger my-4 link_form", method: :delete, data: { confirm: "Se você parar de compartilhar sua localização você não poderá mais usar a funcionalidade de pessoa proximas, tem certeza que deseja continuar?" } %>
     </div>
     <div class="user-div" >
-        <% if @users && @users.length > 0 %>
+        <% if @users && @users.length > 0 && current_user.isContratante %>
             <div class="container card-service" id="cards-width">
             <% @users.each do |user| %>
                 <div class="card text-center shadow rounded rounded-5 border border-dark mt-5" id="cards" style="width:300px;">
@@ -46,14 +46,52 @@
                 </div>
             <% end %>
             </div>
+            <div class="flickr_pagination d-flex justify-content-center my-4">
+                <div class="text-center">
+                    <%= will_paginate @users, :container => false, class: "shadow" %>
+                </div>
+            </div>
+        <% elsif !current_user.isContratante && @services %>
+            <div class="card-service rounded mt-5">
+                <% @services.each do |service| %>
+                    <div class="card border-secondary mb-3 mt-3 rounded-3" style="width: 18rem;height:360px;">
+                    <small class="rounded rounded-pill shadow value-card">
+                        <%= ActionController::Base.helpers.number_to_currency(service.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+                    </small>
+                    <img 
+                        src=<%= service.cover_photo ? service.cover_photo : asset_path('service-background.jpg') %>
+                        class="card-img-top" 
+                        style="margin-top:-36px;height:150px;"
+                    >
+                    <img 
+                        src=<%= service.user.profile_photo ? asset_path(service.user.profile_photo) : asset_path('user_img.jpg') %> 
+                        class="profile-photo rounded rounded-circle shadow" 
+                        style="max-width:100px; margin-top:-105px; margin-bottom:5px;"
+                    >
+                    <div class="card-body d-flex flex-column align-items-center shape-color">
+                        <h6 class="card-title"><%= service.title %></h6>
+                        <p class="card-text"><%= truncate(service.description, length: 70) %></p>
+                        <div class="card-buttons mt-auto">
+                        <% if user_signed_in? && ( service.user == current_user) && service.user_selected_id.nil? %>
+                            <a href=<%= "#{edit_service_path(service)}"%> class="btn btn-warning rounded rounded-pill"><%= fa_icon 'wrench' %></a>
+                            <a href=<%= "#{service_path(service)}"%> class="btn btn-primary rounded rounded-pill">Mais Detalhes</a>
+                            <%= link_to (fa_icon 'trash'), service_path(service), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger rounded rounded-pill" %>
+                        <% else %>
+                            <a href=<%= "#{service_path(service)}"%> class="btn btn-primary rounded rounded-pill">Mais Detalhes</a>
+                        <% end %>
+                        </div>
+                    </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="flickr_pagination d-flex justify-content-center my-4">
+                <div class="text-center">
+                    <%= will_paginate @services, :container => false, class: "shadow" %>
+                </div>
+            </div>
         <% else %>
             <h4 class='mt-5'>Ops... Parece que não há usuários perto de você no momento, tente mais tarde</h4>
         <% end %>
-    </div>
-    <div class="flickr_pagination d-flex justify-content-center my-4">
-        <div class="text-center">
-            <%= will_paginate @users, :container => false, class: "shadow" %>
-        </div>
     </div>
 <% else %>
     <h4 class="mt-5">Você não possui localização cadastrada :(</h4>
@@ -87,7 +125,6 @@
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition((position)=>{
             inputValue.value = `[${position['coords']['latitude']},${position['coords']['longitude']}]`
-            console.log(inputValue)
         });
     }
     //});
