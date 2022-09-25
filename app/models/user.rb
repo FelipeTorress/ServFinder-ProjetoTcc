@@ -20,6 +20,8 @@ class User < ApplicationRecord
   end
 
   def select_profile_photo
+    return if self.profile_photo
+
     color = COLOR_PROFILE[rand(9)]
     self.profile_photo = "profile/profile-#{color}.jpg"
   end

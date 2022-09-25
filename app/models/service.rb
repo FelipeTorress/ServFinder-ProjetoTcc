@@ -1,5 +1,5 @@
 class Service < ApplicationRecord
-  before_save :cover_photo
+  before_save :select_cover_photo
 
   validates :title, presence: true, length: {minimum: 6, maximu: 50}
   validates :description, presence: true, length: {minimum: 10, maximu: 300}
@@ -15,7 +15,9 @@ class Service < ApplicationRecord
     'https://th.bing.com/th/id/OIP.pKAJ1XROcd9bQTKYbwg5xAHaDZ?w=305&h=160&c=7&r=0&o=5&pid=1.7'
   ].freeze
 
-  def cover_photo
+  def select_cover_photo
+    return if self.cover_photo
+
     self.cover_photo = COVER_PHOTO[rand(6)]
   end
 end
