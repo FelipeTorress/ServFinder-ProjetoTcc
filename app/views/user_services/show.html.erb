@@ -83,21 +83,21 @@
 
                             <% if current_user.isContratante %>
                                 <h6>Meios de Contato do Prestador:</h6>
-                                <div class="item shadow border border-secondary" id=<%= prestador.id.to_s %> style="border-radius:25px;">
-                                    <p>Passe o Mouse Aqui Para Ver</p>
-                                    <div class="descricao">
-                                        <% if prestador.permit_phone_number%>
-                                            <%= (fa_icon 'phone') %>
-                                            <%= prestador.phone_number %><br>
-                                        <% end %>
-                                        <% if prestador.permit_email %>
-                                            <%= (fa_icon 'envelope') %>
-                                            <%= prestador.email %>
-                                        <% end %>
+                                <% if permit_comunication(prestador) && permit_comunication(current_user) %>
+                                    <div class="item shadow border border-secondary" id=<%= prestador.id.to_s %> style="border-radius:25px;">
+                                        <p>Passe o Mouse Aqui Para Ver</p>
+                                        <div class="descricao">
+                                            <% if prestador.permit_phone_number%>
+                                                <%= (fa_icon 'phone') %>
+                                                <%= prestador.phone_number %><br>
+                                            <% end %>
+                                            <% if prestador.permit_email %>
+                                                <%= (fa_icon 'envelope') %>
+                                                <%= prestador.email %>
+                                            <% end %>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <% unless permit_comunication(prestador) && permit_comunication(current_user) %>
+                                <% else %>
                                     <% if permit_comunication(prestador) %>
                                         <p>Como você não compartilha seus dados de contato, utilize nosso chat:</p>
                                     <% else %>
@@ -107,24 +107,25 @@
                                 <% end %>
                             <% else %>
                                 <h6>Meios de Contato do Contratante:</h6>
-                                <div class="item shadow border border-secondary" id=<%= service.user.id.to_s %> style="border-radius:25px;">
-                                    <p>Passe o Mouse Aqui Para Ver</p>
-                                    <div class="descricao">
-                                        <% if service.user.permit_phone_number%>
-                                            <%= (fa_icon 'phone') %>
-                                            <%= service.user.phone_number %><br>
-                                        <% end %>
-                                        <% if service.user.permit_email %>
-                                            <%= (fa_icon 'envelope') %>
-                                            <%= service.user.email %><br>
-                                        <% end %>
-                                        <% if service.user.address %>
-                                            <%= (fa_icon 'map-marker') %>
-                                            <%= service.user.address %>
-                                        <% end %>
+                                <% if permit_comunication(service.user) && permit_comunication(current_user) %>
+                                    <div class="item shadow border border-secondary" id=<%= service.user.id.to_s %> style="border-radius:25px;">
+                                        <p>Passe o Mouse Aqui Para Ver</p>
+                                        <div class="descricao">
+                                            <% if service.user.permit_phone_number%>
+                                                <%= (fa_icon 'phone') %>
+                                                <%= service.user.phone_number %><br>
+                                            <% end %>
+                                            <% if service.user.permit_email %>
+                                                <%= (fa_icon 'envelope') %>
+                                                <%= service.user.email %><br>
+                                            <% end %>
+                                            <% if service.user.address %>
+                                                <%= (fa_icon 'map-marker') %>
+                                                <%= service.user.address %>
+                                            <% end %>
+                                        </div>
                                     </div>
-                                </div>
-                                <% unless permit_comunication(service.user) && permit_comunication(current_user) %>
+                                <% else %>
                                     <% if permit_comunication(service.user) %>
                                         <p>Como você não compartilha seus dados de contato, utilize nosso chat:</p>
                                     <% else %>
