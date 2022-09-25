@@ -124,7 +124,7 @@
                   <h4>Prestador Selecionado:</h4>
                   <%= link_to @prestador_escolhido.name, user_path(@prestador_escolhido) %><br>
                   <img 
-                    src=<%= asset_path('user_img.jpg') %> 
+                    src=<%= @prestador_escolhido.profile_photo ? asset_path(@prestador_escolhido.profile_photo) : asset_path('user_img.jpg') %> 
                     class="profile-photo rounded rounded-circle shadow" 
                     style="max-width:100px;"
                   >

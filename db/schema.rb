@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_19_234008) do
+ActiveRecord::Schema.define(version: 2022_09_25_171334) do
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_234008) do
     t.datetime "updated_at", null: false
     t.boolean "finished", default: false
     t.boolean "finished_prestador", default: false
+    t.string "cover_photo"
     t.index ["finished"], name: "index_services_on_finished"
     t.index ["finished_prestador"], name: "index_services_on_finished_prestador"
     t.index ["title"], name: "index_services_on_title"
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_234008) do
     t.integer "score"
     t.boolean "accepted_cookies", default: false
     t.integer "services_realized", default: 0
+    t.string "profile_photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index [nil], name: "index_users_on_user_selected_id"

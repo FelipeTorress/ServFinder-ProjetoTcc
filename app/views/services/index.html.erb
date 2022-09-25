@@ -12,7 +12,7 @@
       >
       
       <img 
-        src=<%= asset_path('user_img.jpg') %> 
+        src=<%= service.user.profile_photo ? asset_path(service.user.profile_photo) : asset_path('user_img.jpg') %> 
         class="profile-photo rounded rounded-circle shadow" 
         style="max-width:100px; margin-top:-105px; margin-bottom:5px;"
       >
