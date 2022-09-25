@@ -93,8 +93,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_234008) do
     t.boolean "isContratante"
     t.string "address"
     t.integer "score"
-    t.boolean "accepted_cookies"
-    t.boolean "finished", default: false
+    t.boolean "accepted_cookies", default: false
     t.integer "services_realized", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

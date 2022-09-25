@@ -19,7 +19,7 @@ class ServicesController < ApplicationController
   def index
     service = Service.where(user_selected_id: nil)
     #mudar para 19
-    @service = service.paginate(page: params[:page], per_page: 4)
+    @service = service.paginate(page: params[:page], per_page: 12)
   end
 
   def new
