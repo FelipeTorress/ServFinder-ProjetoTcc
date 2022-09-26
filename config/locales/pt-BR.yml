@@ -220,6 +220,7 @@ pt-BR:
       new:
         sign_up: "Criar Conta"
       edit:
+        are_you_sure: "Tem certeza que deseja apagar sua conta? Essa ação é irreversível!"
         title: "Editando suas informações"
         update: "Confirmar Mudanças"
         leave_blank_if_you_don_t_want_to_change_it: "Deixe em branco se não quiser mudar"
