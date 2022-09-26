@@ -23,13 +23,6 @@
         <%= f.telephone_field :phone_number, autocomplete: "Digite telefone", pattern: '\([0-9]{2}\)[0-9]{4,6}-?[0-9]{3,4}$', class: 'form-control'%>
       </div>
 
-      <div id="endereco">
-        <div class="form-group">
-          <%= f.label :endereço_completo %><span style="color:red;">*</span><br />
-          <%= f.text_field :address, autocomplete: "Digite seu endereço", class: 'form-control' %>
-        </div>
-      </div>
-
       <div class="form-group">
         <%= f.label :senha %><span style="color:red;">*</span>
         <% if @minimum_password_length %>
@@ -49,11 +42,16 @@
       </p>
       
       <div>
-        <%= f.radio_button :isContratante, 'Contratante', :checked => true, id: "contratante-selected"  %> 
-        <%= f.label :isContratante, 'Contratante', :value => true %>
+        <%= f.radio_button :isContratante, true, class: "contratante-selected", checked: true%>
+        <%= f.label :isContratante, 'Contratante', :value => true %> 
         &nbsp
-        <%= f.radio_button :isContratante, 'Prestador', id: "prestador-selected" %>
+        <%= f.radio_button :isContratante, false, class: "prestador-selected" %>
         <%= f.label :isContratante, 'Prestador', :value => false %>
+      </div>
+
+      <div class="form-group" id="endereco">
+        <%= f.label :endereço_completo %><span style="color:red;">*</span><br />
+        <%= f.text_field :address, autocomplete: "Digite seu endereço", class: 'form-control' %>
       </div>
 
       <p style="margin-top:10px;"> Para Criar sua Conta Você deve Aceitar:</p>
@@ -78,10 +76,10 @@
 </div>
 
 <script>
-    $('#prestador-selected').click(function() {
+    $('.prestador-selected').click(function() {
       $("#endereco").addClass("disableddiv");
     });
-     $('#contratante-selected').click(function() {
+    $('.contratante-selected').click(function() {
       $("#endereco").removeClass("disableddiv");
     });
 </script>

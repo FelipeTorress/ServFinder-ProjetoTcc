@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: {case_sensitive: false}, length: {minimum: 5, maximum: 50}
   validates :accepted_terms_of_use, presence: true
   validates :accepted_privacy_policy, presence: true
+  validates :address, presence: true, if: :account_tipe?
 
   COLOR_PROFILE = ['blue','green', 'purple', 'red', 'yellow', 'blueLight', 'brown', 'pinkLight', 'pink']
 
@@ -24,5 +25,9 @@ class User < ApplicationRecord
 
     color = COLOR_PROFILE[rand(9)]
     self.profile_photo = "profile/profile-#{color}.jpg"
+  end
+
+  def account_tipe?
+    self.isContratante
   end
 end
