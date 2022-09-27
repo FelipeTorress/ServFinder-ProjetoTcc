@@ -38,14 +38,19 @@ function chamarMapaLocAproximada(loc){
     }
 }
 
-function chamarMapaLocExata(){
-    var map = L.map('map').setView([51.505, -0.09], 14);
+function chamarMapaLocExata(loc){
+    try{
+        user_loc = loc.split(',')
+        var map = L.map('map').setView([parseFloat(user_loc[0]), parseFloat(user_loc[1])], 15);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-  
-    L.marker([51.5, -0.09]).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    
+        L.marker([parseFloat(user_loc[0]), parseFloat(user_loc[1])]).addTo(map);
+    } catch (e){
+        location.reload();
+    }
 }
 
 

@@ -1,7 +1,16 @@
+<head>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+  integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+  crossorigin=""></script>
+</head>
+
 <div class="welcome-background">
     <h2 style="margin-top: 75px;">
     <%= fa_icon 'comments'%>
-    Conversando com Pessoa
+    Bate-Papo Online ServFinder
     </h2>
 
     <div 
@@ -20,4 +29,41 @@
             <%= f.button "Enviar", class: 'btn btn-primary', style: "border-radius:0px 0px 15px 0px;overflow:hidden" %>
         <% end %>
     </div>
+    <% unless current_user.isContratante %>
+        <button type="button" class="btn btn-primary position-absolute" style="top:85vh;left:80vw;" id="show-mapa">
+            Dados do Contratante
+        </button>
+        <button type="button" class="btn btn-primary position-absolute" style="top:85vh;left:80vw;" id="hide-mapa">
+            Ocultar Dados
+        </button>
+    <% end %>
+    <div id="mapa-contratante" class="rounded-3 shadow border-secondary" style="background-color:white;margin: 20px auto 20px;width:550px;">
+        <h6>Endereço Residencial:</h6>
+        <p><%= @contratante.address %></p>
+        <% if @place %>
+            <h6>Localização do Usuário<h6>
+            <div id="map" class='mb-5 location-map' style="width:500px;height:300px;"></div>
+        <% end %>
+        <input type="hidden" id="latitude_longitude" value=<%= "#{@place.latitude},#{@place.longitude}"%>>
+    </div>
 </div>
+
+<script>
+  $(document).ready(()=>{
+    const elemento = document.getElementById('latitude_longitude').value;
+    chamarMapaLocExata(elemento);
+    $("#mapa-contratante").hide();
+    $("#hide-mapa").hide();
+  });
+  $("#show-mapa").on('click', function (){
+    $("#mapa-contratante").show();
+    $("#hide-mapa").show();
+    $("#show-mapa").hide();
+  });
+  $("#hide-mapa").on('click', function (){
+    $("#mapa-contratante").hide();
+    $("#hide-mapa").hide();
+    $("#show-mapa").show();
+  });
+
+</script>
