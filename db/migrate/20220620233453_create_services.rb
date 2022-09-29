@@ -11,5 +11,6 @@ class CreateServices < ActiveRecord::Migration[5.2]
     end
     add_index :services, :user_id
     add_index :services, :title
+    add_index :services, :user_selected_id
   end
 end
