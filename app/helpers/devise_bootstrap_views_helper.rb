@@ -13,6 +13,8 @@ module DeviseBootstrapViewsHelper
         msg = 'Você precisa aceitar a Política de Privacidade'
       elsif msg.include? 'Current password'
         msg = 'Para atualizar seus dados digite sua senha no campo indicado!'
+      elsif msg.include? 'Address'
+        msg.gsub! 'Address', 'Endereço'
       end
       content_tag(:li, msg)
     end.join
