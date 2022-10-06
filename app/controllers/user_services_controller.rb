@@ -60,7 +60,10 @@ class UserServicesController < ApplicationController
         log.save
       end
     else
+      @place = {}
       @services.each do |service|
+        user_location = UserPlace.find_by(user: service.user)
+        @place[service.user.id] = Place.find(user_location.place.id) if user_location
         log_exists = UserLog.where(info: "SeenUser: #{service.user.id}")
 
         next unless log_exists.empty?

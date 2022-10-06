@@ -54,10 +54,21 @@
         <%= f.text_field :address, autocomplete: "Digite seu endereço", class: 'form-control' %>
       </div>
 
+      <hr>
+        <p style="margin-top:10px;"> 
+        Você deseja compartilhar seus dados de contato?:
+        <br /><em class="form-text text-muted">O consentimento pode ser alterado nas configurações</em>
+        </p>
+        <div>
+          <% resource.permit_phone_number = false %>
+          <%= f.check_box :permit_phone_number %>
+          <%= f.label 'Aceito compartilhar' %>
+        </div>
+      <hr>
       <p style="margin-top:10px;"> Para Criar sua Conta Você deve Aceitar:</p>
 
       <div>
-        <%= f.check_box :accepted_terms_of_use %>
+        <%= f.check_box :accepted_terms_of_use, checked: false %>
         <%= link_to 'Termos de Uso', terms_index_path, target: "_blank" %>
       </div>
       

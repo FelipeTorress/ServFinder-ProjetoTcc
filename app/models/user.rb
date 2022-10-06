@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_save :email_downcase
   before_save :select_profile_photo
+  before_save :consent
 
   has_many :services
   has_many :messages
@@ -25,6 +26,12 @@ class User < ApplicationRecord
 
     color = COLOR_PROFILE[rand(9)]
     self.profile_photo = "profile/profile-#{color}.jpg"
+  end
+
+  def consent
+    return unless self.created_at.nil?
+
+    self.permit_email = false unless self.permit_phone_number
   end
 
   def account_tipe?

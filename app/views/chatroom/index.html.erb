@@ -43,8 +43,8 @@
         <% if @place %>
             <h6>Localização do Usuário<h6>
             <div id="map" class='mb-5 location-map' style="width:500px;height:300px;"></div>
+            <input type="hidden" id="latitude_longitude" value=<%= "#{@place.latitude},#{@place.longitude}"%>>
         <% end %>
-        <input type="hidden" id="latitude_longitude" value=<%= "#{@place.latitude},#{@place.longitude}"%>>
     </div>
 </div>
 
